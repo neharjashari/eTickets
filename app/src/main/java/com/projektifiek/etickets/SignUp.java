@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +48,11 @@ public class SignUp extends AppCompatActivity {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String token = createToken();
+
+        if (!validate()) {
+            Toast.makeText(getBaseContext(), "Login failed. Please edit the fields correctly", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         try {
             // Execute SQL statement to insert new data
@@ -114,4 +120,34 @@ public class SignUp extends AppCompatActivity {
     }
 
 
+    public boolean validate() {
+        boolean valid = true;
+
+        String name = fullnameEditText.getText().toString();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        if (name.isEmpty() || name.length() < 3) {
+            fullnameEditText.setError("at least 3 characters");
+            valid = false;
+        } else {
+            fullnameEditText.setError(null);
+        }
+
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEditText.setError("enter a valid email address");
+            valid = false;
+        } else {
+            emailEditText.setError(null);
+        }
+
+        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+            passwordEditText.setError("between 4 and 10 alphanumeric characters");
+            valid = false;
+        } else {
+            passwordEditText.setError(null);
+        }
+
+        return valid;
+    }
 }
