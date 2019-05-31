@@ -74,8 +74,18 @@
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
                 android:text="Create Account"
-                android:clickable="false"
                 android:onClick="createAccount" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_readData"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:text="Read Data"
+                android:onClick="readDataFromDB" />
+
 
             <TextView android:id="@+id/link_login"
                 android:layout_width="fill_parent"
