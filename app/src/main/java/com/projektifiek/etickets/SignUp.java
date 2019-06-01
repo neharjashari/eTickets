@@ -1,4 +1,4 @@
-    package com.projektifiek.etickets;
+package com.projektifiek.etickets;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -197,4 +197,5 @@ public class SignUp extends AppCompatActivity {
 
         return valid;
     }
+
 }
