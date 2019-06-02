@@ -19,5 +19,5 @@
         android:id="@+id/menu_add_event"
         android:icon="@drawable/plus"
         android:title="Add Event"
-        app:showAsAction="ifRoom|always|withText"/>
+        app:showAsAction="ifRoom|withText"/>
 </menu>

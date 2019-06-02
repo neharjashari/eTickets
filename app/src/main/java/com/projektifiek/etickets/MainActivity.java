@@ -112,41 +112,41 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//    /*MENU*/
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
-//        switch (item.getItemId()) {
-//            case R.id.menu_home:
-//                // do your code
-//                return true;
-//            case R.id.menu_user_profile:
-//                // do your code
-//                return true;
-//            case R.id.menu_events:
-//                // do your code
-//                return true;
-//            case R.id.menu_tickets:
-//                // do your code
-//                return true;
-//            case R.id.menu_settings:
-//                // do your code
-//                return true;
-//            case R.id.menu_exit_the_app:
-//                finish();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
+    /*MENU*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+            case R.id.menu_home:
+                // do your code
+                return true;
+            case R.id.menu_user_profile:
+                // do your code
+                return true;
+            case R.id.menu_events:
+                // do your code
+                return true;
+            case R.id.menu_tickets:
+                // do your code
+                return true;
+            case R.id.menu_settings:
+                // do your code
+                return true;
+            case R.id.menu_exit_the_app:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
-    /////////////////////////////////////////////////////////////////////////////////
 }
