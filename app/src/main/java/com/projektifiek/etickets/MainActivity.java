@@ -48,11 +48,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String token = "12345";
-
         Request request = new
                 Request.Builder()
-                .url("http://192.168.179.1:8000/event/" + token)
+                .url("http://192.168.179.1:8000/events")
                 .get()
                 .build();
         Call call = client.newCall(request);
