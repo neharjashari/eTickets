@@ -146,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentOpenUserProfile);
                 return true;
             case R.id.menu_events:
-                // do your code
+                Intent intentOpenUserEvents = new Intent(getApplicationContext(), UserEvents.class);
+                intentOpenUserEvents.putExtra("usersToken", usersToken);
+                startActivity(intentOpenUserEvents);
                 return true;
             case R.id.menu_tickets:
                 // do your code

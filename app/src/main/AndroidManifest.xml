@@ -16,25 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserProfile">
+        <activity android:name=".UserEvents">
+
+        </activity>
+        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".CreateEvent" />
+        <activity android:name=".EventActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateEvent"></activity>
-        <activity android:name=".EventActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".OpeningScreen">
 
         </activity>
-        <activity android:name=".OpeningScreen" />
-        <activity android:name=".SignUp">
-
-        </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".SignUp"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
