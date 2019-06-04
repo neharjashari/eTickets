@@ -64,7 +64,7 @@ public class SignUp extends AppCompatActivity {
             cv.put("fullname", fullname);
             cv.put("email", email);
             cv.put("password", password);
-            cv.put("token", token);
+            cv.put("usersToken", token);
 
             long id = usersDB.insert("users", null, cv);
 
@@ -93,7 +93,7 @@ public class SignUp extends AppCompatActivity {
 //        String fullname = fullnameEditText.getText().toString();
 //        String email = emailEditText.getText().toString();
 //        String password = passwordEditText.getText().toString();
-//        String token = createToken();
+//        String usersToken = createToken();
 //
 //        if (!validate()) {
 //            Toast.makeText(getBaseContext(), "Login failed. Please edit the fields correctly", Toast.LENGTH_LONG).show();
@@ -102,8 +102,8 @@ public class SignUp extends AppCompatActivity {
 //
 //        try {
 //            // Execute SQL statement to insert new data
-//            usersDB.execSQL("INSERT INTO users (fullname, email, password, token) VALUES ('" +
-//                    fullname + "', '" + email + "', '" + password + "', '" + token + "');");
+//            usersDB.execSQL("INSERT INTO users (fullname, email, password, usersToken) VALUES ('" +
+//                    fullname + "', '" + email + "', '" + password + "', '" + usersToken + "');");
 //
 //            Toast.makeText(this, "Account was created.", Toast.LENGTH_SHORT).show();
 //
@@ -128,7 +128,7 @@ public class SignUp extends AppCompatActivity {
 //
 //            // Execute an SQL statement that isn't select
 //            usersDB.execSQL("CREATE TABLE IF NOT EXISTS users" +
-//                    "(id integer primary key, fullname VARCHAR, email VARCHAR unique, password VARCHAR, token VARCHAR);");
+//                    "(id integer primary key, fullname VARCHAR, email VARCHAR unique, password VARCHAR, usersToken VARCHAR);");
 //
 //            // The database on the file system
 //            File database = getApplicationContext().getDatabasePath("eticketsdb.db");

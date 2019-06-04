@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity{
                 }, 3000);
 
 
-        // TODO: Gets the logged user's token
+        // Gets the logged user's usersToken
         usersToken = getUsersToken(email);
 
         Log.d("Users Token: ", usersToken);

@@ -33,13 +33,15 @@ public class MainActivity extends AppCompatActivity {
     OkHttpClient client = new OkHttpClient();
     EventAdapter adapteri;
 
+    public String usersToken = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        String usersToken = intent.getStringExtra("usersToken");
+        Intent intentGetToken = getIntent();
+        usersToken = intentGetToken.getStringExtra("usersToken");
         Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         lvEvent = findViewById(R.id.lvEvent);
@@ -130,14 +132,18 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_add_event:
                 Intent intentAddEvent = new Intent(getApplicationContext(), CreateEvent.class);
+                intentAddEvent.putExtra("usersToken", usersToken);
                 startActivity(intentAddEvent);
                 return true;
             case R.id.menu_home:
                 Intent intentOpenMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                intentOpenMainActivity.putExtra("usersToken", usersToken);
                 startActivity(intentOpenMainActivity);
                 return true;
             case R.id.menu_user_profile:
-                // do your code
+                Intent intentOpenUserProfile = new Intent(getApplicationContext(), UserProfile.class);
+                intentOpenUserProfile.putExtra("usersToken", usersToken);
+                startActivity(intentOpenUserProfile);
                 return true;
             case R.id.menu_events:
                 // do your code
