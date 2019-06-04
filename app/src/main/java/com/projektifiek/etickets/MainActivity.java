@@ -1,5 +1,6 @@
 package com.projektifiek.etickets;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        String usersToken = intent.getStringExtra("usersToken");
+        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         lvEvent = findViewById(R.id.lvEvent);
         adapteri = new EventAdapter(MainActivity.this);
@@ -123,8 +128,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
+            case R.id.menu_add_event:
+                Intent intentAddEvent = new Intent(getApplicationContext(), CreateEvent.class);
+                startActivity(intentAddEvent);
+                return true;
             case R.id.menu_home:
-                // do your code
+                Intent intentOpenMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intentOpenMainActivity);
                 return true;
             case R.id.menu_user_profile:
                 // do your code

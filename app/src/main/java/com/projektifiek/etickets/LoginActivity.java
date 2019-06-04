@@ -19,6 +19,8 @@ public class LoginActivity extends AppCompatActivity{
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
+    public String usersToken = "12345";
+
     EditText _emailText;
     EditText _passwordText;
     Button _loginButton;
@@ -131,9 +133,15 @@ public class LoginActivity extends AppCompatActivity{
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
 
-                // TODO: Implement successful signup logic here
+//                // TODO: Gets the logged user's token
+//                String email = _emailText.getText().toString();
+//                usersToken = getUsersToken(email);
+//
+//                Log.d("Users Token: ", usersToken);
+
                 // By default we just finish the Activity and log them in automatically
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("usersToken", usersToken);
                 startActivity(intent);
 
                 this.finish();
@@ -179,5 +187,31 @@ public class LoginActivity extends AppCompatActivity{
         }
 
         return valid;
+    }
+
+
+    public String getUsersToken(String userEmail) {
+
+        usersDB = database.getReadableDatabase();
+
+        String query = "SELECT email, token FROM users";
+
+        Cursor cursor = usersDB.rawQuery(query, null);
+
+        String emailDB, response;
+        response = "not found";
+
+        if (cursor.moveToFirst()) {
+            do {
+                emailDB = cursor.getString(0);
+
+                if (emailDB.equals(userEmail)) {
+                    response = cursor.getString(1);
+                    break;
+                }
+            } while (cursor.moveToNext());
+        }
+
+        return response;
     }
 }
