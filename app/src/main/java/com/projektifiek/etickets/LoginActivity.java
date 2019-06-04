@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity{
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    public String usersToken = "12345";
+    public String usersToken = "";
 
     EditText _emailText;
     EditText _passwordText;
@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity{
             return;
         }
 
-        Log.w("myApp", "Valid login");
+        Log.w("myApp", "Valid data");
 
         _loginButton.setEnabled(false);
 
@@ -87,6 +87,15 @@ public class LoginActivity extends AppCompatActivity{
         String passwordDB = searchPassword(email);
         Log.w("myApp", "DB password: " + passwordDB);
         if(!password.equals(passwordDB)) {
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            // On complete call either onLoginSuccess or onLoginFailed
+                            //onLoginSuccess();
+                            onLoginFailed();
+                            progressDialog.dismiss();
+                        }
+                    }, 3000);
             return;
         }
 
@@ -99,6 +108,17 @@ public class LoginActivity extends AppCompatActivity{
                         progressDialog.dismiss();
                     }
                 }, 3000);
+
+
+        // TODO: Gets the logged user's token
+        usersToken = getUsersToken(email);
+
+        Log.d("Users Token: ", usersToken);
+
+
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra("usersToken", usersToken);
+        startActivity(intent);
     }
 
 
@@ -132,18 +152,7 @@ public class LoginActivity extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-//                // TODO: Gets the logged user's token
-//                String email = _emailText.getText().toString();
-//                usersToken = getUsersToken(email);
-//
-//                Log.d("Users Token: ", usersToken);
-
                 // By default we just finish the Activity and log them in automatically
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("usersToken", usersToken);
-                startActivity(intent);
-
                 this.finish();
             }
         }
