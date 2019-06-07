@@ -68,7 +68,7 @@ public class SignUp extends AppCompatActivity {
 
         try {
             //TODO: HASH function
-//            String generatedSecuredPasswordHash = generateStorngPasswordHash(password);
+//            String generatedSecuredPasswordHash = generateStrongPasswordHash(password);
 
             ContentValues cv = new ContentValues();
             cv.put("fullname", fullname);
@@ -101,70 +101,6 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(SignUp.this, cursor.getString(cursor.getColumnIndex("fullname")), Toast.LENGTH_LONG).show();
         }
     }
-
-
-//    public void createAccount(View view) {
-//        // Get the contact name and email entered
-//        String fullname = fullnameEditText.getText().toString();
-//        String email = emailEditText.getText().toString();
-//        String password = passwordEditText.getText().toString();
-//        String usersToken = createToken();
-//
-//        if (!validate()) {
-//            Toast.makeText(getBaseContext(), "Login failed. Please edit the fields correctly", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-//
-//        try {
-//            // Execute SQL statement to insert new data
-//            usersDB.execSQL("INSERT INTO users (fullname, email, password, usersToken) VALUES ('" +
-//                    fullname + "', '" + email + "', '" + password + "', '" + usersToken + "');");
-//
-//            Toast.makeText(this, "Account was created.", Toast.LENGTH_SHORT).show();
-//
-//            Intent intentLogin = new Intent(SignUp.this, LoginActivity.class);
-//            startActivity(intentLogin);
-//
-//        } catch (SQLiteConstraintException e) {
-//            Toast.makeText(this, "You already have an accout with this email.", Toast.LENGTH_LONG).show();
-//        }
-//    }
-
-
-
-//    public void createDatabase(View view) {
-//
-//        try {
-//
-//            // Opens a current database or creates it
-//            // Pass the database name, designate that only this app can use it
-//            // and a DatabaseErrorHandler in the case of database corruption
-//            usersDB = this.openOrCreateDatabase("eticketsdb", MODE_PRIVATE, null);
-//
-//            // Execute an SQL statement that isn't select
-//            usersDB.execSQL("CREATE TABLE IF NOT EXISTS users" +
-//                    "(id integer primary key, fullname VARCHAR, email VARCHAR unique, password VARCHAR, usersToken VARCHAR);");
-//
-//            // The database on the file system
-//            File database = getApplicationContext().getDatabasePath("eticketsdb.db");
-//
-//            // Check if the database exists
-//            if (database.exists()) {
-//                Toast.makeText(this, "Database Available", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(this, "Database Missing", Toast.LENGTH_SHORT).show();
-//            }
-//
-//        } catch(Exception e){
-//
-//            Log.e("CONTACTS ERROR", "Error Creating Database");
-//
-//        }
-//
-//        // Make buttons clickable since the database was created
-//        btnSignUp.setClickable(true);
-//
-//    }
 
 
     @Override
@@ -218,7 +154,7 @@ public class SignUp extends AppCompatActivity {
     // * Advanced password security using PBKDF2WithHmacSHA1 algorithm * //
 
 //    TODO: HASH functions
-//    private static String generateStorngPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeySpecException {
+//    private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeySpecException {
 //        int iterations = 1000;
 //        char[] chars = password.toCharArray();
 //        byte[] salt = getSalt();

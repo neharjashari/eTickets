@@ -83,6 +83,14 @@ public class LoginActivity extends AppCompatActivity{
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
+        //        //TODO: me vendos ku duhet funksionin e Hash-it
+//        String passwordDB = generateStrongPasswordHash(password);
+//
+//        boolean matched = validatePassword("password", passwordDB);
+//        if (!matched) {
+//          return;
+//        }
+
         // Authentication logic here.
         String passwordDB = searchPassword(email);
         Log.w("myApp", "DB password: " + passwordDB);
@@ -143,17 +151,6 @@ public class LoginActivity extends AppCompatActivity{
                 }
             } while (cursor.moveToNext());
         }
-
-//        //TODO: me vendos ku duhet funksionin e Hash-it
-//        String  originalPassword = "password";
-//        String generatedSecuredPasswordHash = generateStorngPasswordHash(originalPassword);
-//        System.out.println(generatedSecuredPasswordHash);
-//
-//        boolean matched = validatePassword("password", generatedSecuredPasswordHash);
-//        System.out.println(matched);
-//
-//        matched = validatePassword("password1", generatedSecuredPasswordHash);
-//        System.out.println(matched);
 
         return response;
     }
