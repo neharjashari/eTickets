@@ -1,6 +1,10 @@
 package com.projektifiek.etickets;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Environment;
@@ -38,6 +42,9 @@ public class QRCode extends AppCompatActivity {
 
     public String usersToken = "";
 
+    private Database database;
+    private SQLiteDatabase usersDB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +56,6 @@ public class QRCode extends AppCompatActivity {
 
         tvMessage = (TextView) findViewById(R.id.tvMessage);
 
-//        start = (Button) findViewById(R.id.start);
-//        save = (Button) findViewById(R.id.save);
-
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
 //        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
@@ -59,6 +63,10 @@ public class QRCode extends AppCompatActivity {
         generateQrCode();
 
         tvMessage.setVisibility(TextView.VISIBLE);
+
+
+        database = new Database(QRCode.this, "usersDB", null, 1);
+        usersDB = database.getWritableDatabase();
 
     }
 
@@ -120,5 +128,37 @@ public class QRCode extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("usersToken", usersToken);
         startActivity(intent);
+    }
+
+
+
+    // DATABASE SECTION
+
+    public void saveTicket(View view) {
+        // Get the contact name and email entered
+        String userToken = usersToken;
+        String titulli = String.valueOf(edtValue);
+
+        try {
+
+            ContentValues cv = new ContentValues();
+            cv.put("userToken", userToken);
+            cv.put("titulliEventit", titulli);
+
+            long id = usersDB.insert("usersTicket", null, cv);
+
+            Toast.makeText(this, "User Token: " + String.valueOf(userToken) + "\nTitulli Eventit: " + titulli
+                    , Toast.LENGTH_LONG).show();
+
+        } catch (SQLiteConstraintException e) {
+            Toast.makeText(this, "You already have an accout with this email.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        usersDB.close();
+        super.onDestroy();
     }
 }
