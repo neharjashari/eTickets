@@ -36,10 +36,10 @@ public class CreateEvent extends AppCompatActivity {
     EditText _title;
     EditText _author;
     EditText _content;
-    EditText _photoUrl;
+    EditText _price;
     TextView _tvResult;
 
-    String usersToken = "";
+    String usersToken = "12345";
     String URL = "";
 
     @Override
@@ -50,13 +50,13 @@ public class CreateEvent extends AppCompatActivity {
         _title = (EditText) findViewById(R.id.input_title);
         _author = (EditText) findViewById(R.id.input_author);
         _content = (EditText) findViewById(R.id.input_content);
-        _photoUrl = (EditText) findViewById(R.id.input_photoUrl);
+        _price = (EditText) findViewById(R.id.input_price);
 
         _tvResult = (TextView) findViewById(R.id.tvResult);
 
-        Intent intentGetToken = getIntent();
-        usersToken = intentGetToken.getStringExtra("usersToken");
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+//        Intent intentGetToken = getIntent();
+//        usersToken = intentGetToken.getStringExtra("usersToken");
+//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         URL = "http://192.168.179.1:8000/event/" + usersToken;
 
@@ -135,7 +135,7 @@ public class CreateEvent extends AppCompatActivity {
         jsonObject.accumulate("author",  _author.getText().toString());
         jsonObject.accumulate("date_created", getDateCreated());
         jsonObject.accumulate("content",  _content.getText().toString());
-        jsonObject.accumulate("photo",  _photoUrl.getText().toString());
+        jsonObject.accumulate("price",  _price.getText().toString());
 
         return jsonObject;
     }

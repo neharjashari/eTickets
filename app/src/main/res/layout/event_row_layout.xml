@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:id="@+id/tvÇmimi"
+        android:id="@+id/tvPrice"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDateCreated"
         android:text="20.00 $"
@@ -47,24 +47,5 @@
         android:textColor="@color/colorAccent"
         android:layout_marginTop="20dp"/>
 
-    
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:textSize="18dp"-->
-    <!--android:id="@+id/tvContent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@id/tvDateCreated"-->
-    <!--android:text="Hello world"/>-->
-
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textSize="18dp"-->
-        <!--android:id="@+id/tvPhotoUrl"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/tvContent"-->
-        <!--android:text="Hello world"/>-->
 
 </android.support.constraint.ConstraintLayout>

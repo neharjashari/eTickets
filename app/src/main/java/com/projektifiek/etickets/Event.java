@@ -3,15 +3,15 @@ package com.projektifiek.etickets;
 public class Event {
 
     private int Id;
-    private String Title, Author, DateCreated, Content, PhotoURL;
+    private String Title, Author, DateCreated, Content, Price;
 
-    public Event(int id, String title, String author, String dateCreated, String content, String photoURL) {
+    public Event(int id, String title, String author, String dateCreated, String content, String price) {
         Id = id;
         Title = title;
         Author = author;
         DateCreated = dateCreated;
         Content = content;
-        PhotoURL = photoURL;
+        Price = price;
     }
 
     public int getId() {
@@ -54,11 +54,11 @@ public class Event {
         Content = content;
     }
 
-    public String getPhotoURL() {
-        return PhotoURL;
+    public String getPrice() {
+        return Price;
     }
 
-    public void setPhotoURL(String photoURL) {
-        PhotoURL = photoURL;
+    public void setPrice(String price) {
+        Price = price;
     }
 }

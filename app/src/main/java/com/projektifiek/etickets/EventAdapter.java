@@ -56,7 +56,7 @@ public class EventAdapter extends BaseAdapter {
         viewHolder.getTvAuthor().setText("Author: " + data.get(i).getAuthor());
         viewHolder.getTvDateCreated().setText("Date Created: " + data.get(i).getDateCreated());
 //        viewHolder.getTvContent().setText(data.get(i).getContent());
-//        viewHolder.getTvPhotoUrl().setText(data.get(i).getPhotoURL());
+        viewHolder.getTvPrice().setText(data.get(i).getPrice() + " €");
 
         Animation anim = AnimationUtils
                 .loadAnimation(c,android.R.anim.slide_in_left);

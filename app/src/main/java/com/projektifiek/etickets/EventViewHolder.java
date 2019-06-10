@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 public class EventViewHolder {
 
-    TextView tvTitle, tvAuthor, tvDateCreated, tvContent, tvPhotoUrl;
+    TextView tvTitle, tvAuthor, tvDateCreated, tvContent, tvPrice;
 
     public EventViewHolder(View view)
     {
@@ -13,7 +13,7 @@ public class EventViewHolder {
         tvAuthor = view.findViewById(R.id.tvAuthor);
         tvDateCreated = view.findViewById(R.id.tvDateCreated);
 //        tvContent = view.findViewById(R.id.tvContent);
-//        tvPhotoUrl = view.findViewById(R.id.tvPhotoUrl);
+        tvPrice = view.findViewById(R.id.tvPrice);
     }
 
     public TextView getTvTitle() {
@@ -32,7 +32,7 @@ public class EventViewHolder {
         return tvContent;
     }
 
-    public TextView getTvPhotoUrl() {
-        return tvPhotoUrl;
+    public TextView getTvPrice() {
+        return tvPrice;
     }
 }

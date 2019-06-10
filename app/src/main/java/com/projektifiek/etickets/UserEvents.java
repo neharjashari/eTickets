@@ -85,10 +85,9 @@ public class UserEvents extends AppCompatActivity {
                             String author = jsonObject.getString("author");
                             String dateCreated = jsonObject.getString("date_created");
                             String content = jsonObject.getString("content");
-                            String photoUrl = jsonObject.getString("photo");
-//                            photot = photot.substring(0,10);
+                            String price = jsonObject.getString("price");
 
-                            Event objEvent = new Event(id,title,author,dateCreated,content,photoUrl);
+                            Event objEvent = new Event(id,title,author,dateCreated,content,price);
                             adapteri.data.add(objEvent);
                         }
                     } catch (JSONException e) {

@@ -5,13 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +26,7 @@ public class EventActivity extends AppCompatActivity {
     TextView titleTextView;
     TextView dataCreatedTextView;
     TextView authorTextView;
-    ImageView photoImageView;
+    TextView priceTextView;
     TextView contentTextView;
 
     public String usersToken = "";
@@ -43,7 +39,7 @@ public class EventActivity extends AppCompatActivity {
         titleTextView = (TextView) findViewById(R.id.titleTextView);
         dataCreatedTextView = (TextView) findViewById(R.id.dateCreatedTextView);
         authorTextView = (TextView) findViewById(R.id.authorTextView);
-        photoImageView = (ImageView) findViewById(R.id.photoImageView);
+        priceTextView = (TextView) findViewById(R.id.priceTextView);
         contentTextView = (TextView) findViewById(R.id.contentTextView);
 
         Intent intentGetToken = getIntent();
@@ -85,17 +81,17 @@ public class EventActivity extends AppCompatActivity {
                         String author = jsonObject.getString("author");
                         String dateCreated = jsonObject.getString("date_created");
                         String content = jsonObject.getString("content");
-                        String photoUrl = jsonObject.getString("photo");
+                        String price = jsonObject.getString("price");
 //
-//                            photot = photot.substring(0,10);
+//                            price = price.substring(0,10);
 
-//                            Event objEvent = new Event(id,title,author,dateCreated,content,photoUrl);
+//                            Event objEvent = new Event(id,title,author,dateCreated,content,price);
 //                            adapteri.data.add(objEvent);
 
                         titleTextView.setText(title);
-                        dataCreatedTextView.setText(dateCreated);
-                        authorTextView.setText(author);
-//                            photoImageView.setImageURI(photoUrl);
+                        dataCreatedTextView.setText("Date Created: " + dateCreated);
+                        authorTextView.setText("Author: " + author);
+                        priceTextView.setText("Price: " + price + " €");
                         contentTextView.setText(content);
 
                         } catch (JSONException e) {
