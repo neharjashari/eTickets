@@ -125,7 +125,7 @@ public class SignUp extends AppCompatActivity {
     // This function generates unique tokens for every user
     public String createToken() {
         String uuid = UUID.randomUUID().toString();
-        uuid.replace("-", "");
+//        uuid.replace("-", "");
         return uuid;
     }
 
