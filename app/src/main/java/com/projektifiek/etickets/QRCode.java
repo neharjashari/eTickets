@@ -36,7 +36,7 @@ public class QRCode extends AppCompatActivity {
 
     TextView tvMessage;
 
-//    public String usersToken = "";
+    public String usersToken = "";
 
 
     @Override
@@ -52,8 +52,8 @@ public class QRCode extends AppCompatActivity {
 //        start = (Button) findViewById(R.id.start);
 //        save = (Button) findViewById(R.id.save);
 
-//        Intent intentGetToken = getIntent();
-//        usersToken = intentGetToken.getStringExtra("usersToken");
+        Intent intentGetToken = getIntent();
+        usersToken = intentGetToken.getStringExtra("usersToken");
 //        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         generateQrCode();
@@ -159,5 +159,11 @@ public class QRCode extends AppCompatActivity {
             builder.append(ALPHA_NUMERIC_STRING.charAt(character));
         }
         return builder.toString();
+    }
+
+    public void openMainActivity(View view) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("usersToken", usersToken);
+        startActivity(intent);
     }
 }

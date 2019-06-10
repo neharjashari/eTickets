@@ -15,28 +15,6 @@
         android:text="Titulli i Eventit + 1 random string"
         android:textSize="20sp"/>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_horizontal"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_marginTop="30dp">-->
-
-        <!--<Button-->
-            <!--android:layout_weight="1"-->
-            <!--android:id="@+id/start"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Generate" />-->
-
-        <!--<Button-->
-            <!--android:layout_weight="1"-->
-            <!--android:id="@+id/save"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Save" />-->
-    <!--</LinearLayout>-->
-
     <ImageView
         android:id="@+id/QR_Image"
         android:layout_width="wrap_content"
@@ -53,5 +31,19 @@
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnBuy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:text="Get to main page"
+        android:textColor="@android:color/white"
+        android:onClick="openMainActivity"/>
 
 </LinearLayout>
