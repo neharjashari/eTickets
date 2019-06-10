@@ -60,51 +60,6 @@ public class QRCode extends AppCompatActivity {
 
         tvMessage.setVisibility(TextView.VISIBLE);
 
-//        start.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                inputValue = edtValue.getText().toString().trim();
-//                if (inputValue.length() > 0) {
-//                    WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
-//                    Display display = manager.getDefaultDisplay();
-//                    Point point = new Point();
-//                    display.getSize(point);
-//                    int width = point.x;
-//                    int height = point.y;
-//                    int smallerDimension = width < height ? width : height;
-//                    smallerDimension = smallerDimension * 3 / 4;
-//
-//                    qrgEncoder = new QRGEncoder(
-//                            inputValue, null,
-//                            QRGContents.Type.TEXT,
-//                            smallerDimension);
-//                    try {
-//                        bitmap = qrgEncoder.encodeAsBitmap();
-//                        qrImage.setImageBitmap(bitmap);
-//                    } catch (WriterException e) {
-//                        Log.v(TAG, e.toString());
-//                    }
-//                } else {
-//                    edtValue.setError("Required");
-//                }
-//            }
-//        });
-//
-//        save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                boolean save;
-//                String result;
-//                try {
-//                    save = QRGSaver.save(savePath, edtValue.getText().toString().trim(), bitmap, QRGContents.ImageType.IMAGE_JPEG);
-//                    result = save ? "Image Saved" : "Image Not Saved";
-//                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-
     }
 
 
