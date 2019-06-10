@@ -1,7 +1,10 @@
 package com.projektifiek.etickets;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -83,9 +86,19 @@ public class CreateEvent extends AppCompatActivity {
             }
         }.execute();
 
+        // TODO: NOTIFICATIONS
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(CreateEvent.this);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        mBuilder.setContentTitle("Notification Alert - eTickets!");
+        mBuilder.setContentText("The QR code for you ticket has been generated.");
+
         Intent intent = new Intent(CreateEvent.this, MainActivity.class);
         intent.putExtra("usersToken", usersToken);
         startActivity(intent);
+
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        // notificationID allows you to update the notification later on.
+        mNotificationManager.notify(001, mBuilder.build());
     }
 
 

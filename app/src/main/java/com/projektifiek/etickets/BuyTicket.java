@@ -1,7 +1,10 @@
 package com.projektifiek.etickets;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,6 +73,15 @@ public class BuyTicket extends AppCompatActivity {
                     });
                     AlertDialog alertDialog = alertBuilder.create();
                     alertDialog.show();
+
+                    // TODO: NOTIFICATIONS
+                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(BuyTicket.this);
+                    mBuilder.setSmallIcon(R.drawable.logo);
+                    mBuilder.setContentTitle("Notification Alert - eTickets!");
+                    mBuilder.setContentText("You have successfully purchased the ticket for this event.");
+                    NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    // notificationID allows you to update the notification later on.
+                    mNotificationManager.notify(001, mBuilder.build());
 
                 } else {
                     Toast.makeText(BuyTicket.this, "Please complete the form", Toast.LENGTH_LONG).show();

@@ -1,6 +1,8 @@
 package com.projektifiek.etickets;
 
+import android.app.NotificationManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
@@ -8,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Environment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,6 +67,14 @@ public class QRCode extends AppCompatActivity {
 
         tvMessage.setVisibility(TextView.VISIBLE);
 
+        // TODO: NOTIFICATIONS
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(QRCode.this);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        mBuilder.setContentTitle("Notification Alert - eTickets!");
+        mBuilder.setContentText("The QR code for you ticket has been generated.");
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        // notificationID allows you to update the notification later on.
+        mNotificationManager.notify(001, mBuilder.build());
 
         database = new Database(QRCode.this, "usersDB", null, 1);
         usersDB = database.getWritableDatabase();
