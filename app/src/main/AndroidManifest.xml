@@ -18,11 +18,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".BuyTicket">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".QRCode">
 
@@ -31,10 +27,23 @@
         <activity android:name=".UserProfile" />
         <activity android:name=".CreateEvent" />
         <activity android:name=".EventActivity" />
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".OpeningScreen" />
-        <activity android:name=".SignUp" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/AppThemeNoActionBar">
+
+        </activity>
+        <activity android:name=".OpeningScreen"
+            android:theme="@style/AppThemeNoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SignUp"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>
