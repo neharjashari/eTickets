@@ -39,7 +39,7 @@ public class CreateEvent extends AppCompatActivity {
     EditText _price;
     TextView _tvResult;
 
-    String usersToken = "12345";
+    String usersToken = "";
     String URL = "";
 
     @Override
@@ -54,9 +54,9 @@ public class CreateEvent extends AppCompatActivity {
 
         _tvResult = (TextView) findViewById(R.id.tvResult);
 
-//        Intent intentGetToken = getIntent();
-//        usersToken = intentGetToken.getStringExtra("usersToken");
-//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+        Intent intentGetToken = getIntent();
+        usersToken = intentGetToken.getStringExtra("usersToken");
+        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         URL = "http://192.168.179.1:8000/event/" + usersToken;
 
