@@ -1,15 +1,10 @@
 package com.projektifiek.etickets;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -27,9 +22,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class UserTickets extends AppCompatActivity {
 
-    ListView lvEvent;
+    ListView lvUserEvents;
     OkHttpClient client = new OkHttpClient();
     EventAdapter adapteri;
 
@@ -38,17 +33,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_user_tickets);
 
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
         Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
-        lvEvent = findViewById(R.id.lvEvent);
-        adapteri = new EventAdapter(MainActivity.this);
-        lvEvent.setAdapter(adapteri);
+        lvUserEvents = findViewById(R.id.lvUserEvents);
+        adapteri = new EventAdapter(UserTickets.this);
+        lvUserEvents.setAdapter(adapteri);
 
-        lvEvent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvUserEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -57,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         Request request = new
                 Request.Builder()
-                .url("http://192.168.179.1:8000/events")
+                .url("http://192.168.179.1:8000/event/" + usersToken + "/tickets")
                 .get()
                 .build();
         Call call = client.newCall(request);
@@ -93,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                             String content = jsonObject.getString("content");
                             String price = jsonObject.getString("price");
 
-                            Event objEvent = new Event(id,title,author,dateCreated,content,price);
+                            Event objEvent = new Event(id, title, author, dateCreated, content, price);
                             adapteri.data.add(objEvent);
                         }
                     } catch (JSONException e) {
@@ -111,61 +106,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
-
-
-
-    /*MENU*/
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
-        switch (item.getItemId()) {
-            case R.id.menu_add_event:
-                Intent intentAddEvent = new Intent(getApplicationContext(), CreateEvent.class);
-                intentAddEvent.putExtra("usersToken", usersToken);
-                startActivity(intentAddEvent);
-                return true;
-            case R.id.menu_home:
-                Intent intentOpenMainActivity = new Intent(getApplicationContext(), MainActivity.class);
-                intentOpenMainActivity.putExtra("usersToken", usersToken);
-                startActivity(intentOpenMainActivity);
-                return true;
-            case R.id.menu_user_profile:
-                Intent intentOpenUserProfile = new Intent(getApplicationContext(), UserProfile.class);
-                intentOpenUserProfile.putExtra("usersToken", usersToken);
-                startActivity(intentOpenUserProfile);
-                return true;
-            case R.id.menu_events:
-                Intent intentOpenUserEvents = new Intent(getApplicationContext(), UserEvents.class);
-                intentOpenUserEvents.putExtra("usersToken", usersToken);
-                startActivity(intentOpenUserEvents);
-                return true;
-            case R.id.menu_tickets:
-                Intent intentOpenUserTickets = new Intent(getApplicationContext(), UserTickets.class);
-                intentOpenUserTickets.putExtra("usersToken", usersToken);
-                startActivity(intentOpenUserTickets);
-                return true;
-            case R.id.menu_settings:
-//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-////                intentSettings.putExtra("usersToken", usersToken);
-//                startActivity(intentSettings);
-                return true;
-            case R.id.menu_exit_the_app:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
 }

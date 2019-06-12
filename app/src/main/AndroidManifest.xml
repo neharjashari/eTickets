@@ -17,13 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.projektifiek.etickets.MainActivity" />
+        <activity android:name=".UserTickets">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +38,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".CreateEvent"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".EventActivity"
             android:parentActivityName=".MainActivity" />
@@ -58,9 +52,7 @@
             android:name=".SignUp"
             android:parentActivityName=".LoginActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

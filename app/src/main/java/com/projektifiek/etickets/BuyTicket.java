@@ -18,6 +18,12 @@ import com.braintreepayments.cardform.view.CardForm;
 public class BuyTicket extends AppCompatActivity {
 
     public String usersToken = "";
+    public String boughtTicketId = "";
+    public String boughtTicketTitle = "";
+    public String boughtTicketAuthor = "";
+    public String boughtTicketDateCreated = "";
+    public String boughtTicketContent = "";
+    public String boughtTicketPrice = "";
 
     CardForm cardForm;
     Button buy;
@@ -30,6 +36,12 @@ public class BuyTicket extends AppCompatActivity {
 
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
+        boughtTicketId = intentGetToken.getStringExtra("id");
+        boughtTicketTitle = intentGetToken.getStringExtra("title");
+        boughtTicketAuthor = intentGetToken.getStringExtra("author");
+        boughtTicketDateCreated = intentGetToken.getStringExtra("date_created");
+        boughtTicketContent = intentGetToken.getStringExtra("content");
+        boughtTicketPrice = intentGetToken.getStringExtra("price");
         Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
 
@@ -62,6 +74,12 @@ public class BuyTicket extends AppCompatActivity {
 
                             Intent intent = new Intent(getApplicationContext(), QRCode.class);
                             intent.putExtra("usersToken", usersToken);
+                            intent.putExtra("id", "1");
+                            intent.putExtra("title", boughtTicketTitle);
+                            intent.putExtra("author", boughtTicketAuthor);
+                            intent.putExtra("date_created", boughtTicketDateCreated);
+                            intent.putExtra("content", boughtTicketContent);
+                            intent.putExtra("price", boughtTicketPrice);
                             startActivity(intent);
                         }
                     });

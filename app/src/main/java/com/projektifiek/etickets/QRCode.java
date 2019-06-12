@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.os.Environment;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,20 @@ import android.widget.Toast;
 
 import com.google.zxing.WriterException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 import androidmads.library.qrgenearator.QRGSaver;
@@ -29,10 +44,8 @@ import androidmads.library.qrgenearator.QRGSaver;
 public class QRCode extends AppCompatActivity {
 
     String TAG = "GenerateQRCode";
-//    EditText edtValue;
     TextView edtValue;
     ImageView qrImage;
-//    Button start, save;
     String inputValue;
     String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
     Bitmap bitmap;
@@ -41,10 +54,17 @@ public class QRCode extends AppCompatActivity {
     TextView tvMessage;
 
     public String usersToken = "";
+    public String boughtTicketId = "";
+    public String boughtTicketTitle = "";
+    public String boughtTicketAuthor = "";
+    public String boughtTicketDateCreated = "";
+    public String boughtTicketContent = "";
+    public String boughtTicketPrice = "";
 
     private Database database;
     private SQLiteDatabase usersDB;
 
+    String URL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +78,12 @@ public class QRCode extends AppCompatActivity {
 
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
+        boughtTicketId = intentGetToken.getStringExtra("id");
+        boughtTicketTitle = intentGetToken.getStringExtra("title");
+        boughtTicketAuthor = intentGetToken.getStringExtra("author");
+        boughtTicketDateCreated = intentGetToken.getStringExtra("date_created");
+        boughtTicketContent = intentGetToken.getStringExtra("content");
+        boughtTicketPrice = intentGetToken.getStringExtra("price");
 //        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         generateQrCode();
@@ -75,6 +101,8 @@ public class QRCode extends AppCompatActivity {
 
         database = new Database(QRCode.this, "usersDB", null, 1);
         usersDB = database.getWritableDatabase();
+
+        URL = "http://192.168.179.1:8000/event/" + usersToken + "/tickets";
 
     }
 
@@ -109,19 +137,6 @@ public class QRCode extends AppCompatActivity {
     }
 
 
-    public void saveQrCode() {
-        boolean save;
-        String result;
-        try {
-            save = QRGSaver.save(savePath, edtValue.getText().toString().trim(), bitmap, QRGContents.ImageType.IMAGE_JPEG);
-            result = save ? "Image Saved" : "Image Not Saved";
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     public static String randomAlphaNumeric(int count) {
         StringBuilder builder = new StringBuilder();
@@ -140,26 +155,15 @@ public class QRCode extends AppCompatActivity {
 
 
 
-    // DATABASE SECTION
-
-    public void saveTicket(View view) {
-        // Get the contact name and email entered
-        String userToken = usersToken;
-        String titulli = String.valueOf(edtValue);
-
+    public void saveQrCode() {
+        boolean save;
+        String result;
         try {
-
-            ContentValues cv = new ContentValues();
-            cv.put("userToken", userToken);
-            cv.put("titulliEventit", titulli);
-
-            long id = usersDB.insert("usersTicket", null, cv);
-
-            Toast.makeText(this, "User Token: " + String.valueOf(userToken) + "\nTitulli Eventit: " + titulli
-                    , Toast.LENGTH_LONG).show();
-
-        } catch (SQLiteConstraintException e) {
-            Toast.makeText(this, "You already have an accout with this email.", Toast.LENGTH_LONG).show();
+            save = QRGSaver.save(savePath, edtValue.getText().toString().trim(), bitmap, QRGContents.ImageType.IMAGE_JPEG);
+            result = save ? "Image Saved" : "Image Not Saved";
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -169,4 +173,100 @@ public class QRCode extends AppCompatActivity {
         usersDB.close();
         super.onDestroy();
     }
+
+
+
+    // Add to bought tickets in Back End
+
+    public void addToBackEnd(View view) {
+        new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground (String...urls){
+                // params comes from the execute() call: params[0] is the url.
+                try {
+                    try {
+                        return HttpPost(URL);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        return "Error!";
+                    }
+                } catch (IOException e) {
+                    return "Unable to retrieve web page. URL may be invalid.";
+                }
+            }
+            // onPostExecute displays the results of the AsyncTask.
+            @Override
+            protected void onPostExecute (String result){
+
+//                _tvResult.setText(result);
+            }
+        }.execute();
+
+//        // TODO: NOTIFICATIONS
+//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(CreateEvent.this);
+//        mBuilder.setSmallIcon(R.drawable.logo);
+//        mBuilder.setContentTitle("Notification Alert - eTickets!");
+//        mBuilder.setContentText("The QR code for you ticket has been generated.");
+//
+//        Intent intent = new Intent(CreateEvent.this, MainActivity.class);
+//        intent.putExtra("usersToken", usersToken);
+//        startActivity(intent);
+//
+//        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        // notificationID allows you to update the notification later on.
+//        mNotificationManager.notify(001, mBuilder.build());
+    }
+
+
+    private String HttpPost(String myUrl) throws IOException, JSONException {
+        String result = "";
+
+        URL url = new URL(myUrl);
+
+        // 1. create HttpURLConnection
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+        // 2. build JSON object
+        JSONObject jsonObject = buidJsonObject();
+
+        // 3. add JSON content to POST request body
+        setPostRequestContent(conn, jsonObject);
+
+        // 4. make POST request to the given URL
+        conn.connect();
+
+        // 5. return response message
+        return conn.getResponseMessage()+"";
+
+    }
+
+
+    private JSONObject buidJsonObject() throws JSONException {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.accumulate("id", boughtTicketId);
+        jsonObject.accumulate("title", boughtTicketTitle);
+        jsonObject.accumulate("author", boughtTicketAuthor);
+        jsonObject.accumulate("date_created", boughtTicketDateCreated);
+        jsonObject.accumulate("content", boughtTicketContent);
+        jsonObject.accumulate("price", boughtTicketPrice);
+
+        return jsonObject;
+    }
+
+
+    private void setPostRequestContent(HttpURLConnection conn,
+                                       JSONObject jsonObject) throws IOException {
+
+        OutputStream os = conn.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+        writer.write(jsonObject.toString());
+        Log.i(CreateEvent.class.toString(), jsonObject.toString());
+        writer.flush();
+        writer.close();
+        os.close();
+    }
+
 }

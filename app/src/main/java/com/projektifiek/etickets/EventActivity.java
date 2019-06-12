@@ -107,6 +107,12 @@ public class EventActivity extends AppCompatActivity {
     public void openBuyTicketActivity(View view) {
         Intent intent = new Intent(getApplicationContext(), BuyTicket.class);
         intent.putExtra("usersToken", usersToken);
+        intent.putExtra("id", "1");
+        intent.putExtra("title", titleTextView.getText());
+        intent.putExtra("author", authorTextView.getText());
+        intent.putExtra("date_created", dataCreatedTextView.getText());
+        intent.putExtra("content", contentTextView.getText());
+        intent.putExtra("price", priceTextView.getText());
         startActivity(intent);
     }
 
