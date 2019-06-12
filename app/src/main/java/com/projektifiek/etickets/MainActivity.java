@@ -1,18 +1,18 @@
 package com.projektifiek.etickets;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -111,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
 
+    }
 
 
 
@@ -153,7 +153,9 @@ public class MainActivity extends AppCompatActivity {
                 // do your code
                 return true;
             case R.id.menu_settings:
-                // do your code
+                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+//                intentSettings.putExtra("usersToken", usersToken);
+                startActivity(intentSettings);
                 return true;
             case R.id.menu_exit_the_app:
                 finish();

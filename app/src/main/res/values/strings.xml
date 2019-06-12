@@ -13,4 +13,17 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">View Settings</string>
+    <string name="notifications_header">Notifications</string>
+
+    <!-- Messages Preferences -->
+    <string name="text_size_title">Text Size</string>
+    <string name="color_title">Text Color</string>
+    <string name="color_values">Text Color</string>
+
+    <!-- Sync Preferences -->
+    <string name="notifications_title">Allow notifications</string>
 </resources>

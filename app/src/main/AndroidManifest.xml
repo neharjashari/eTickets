@@ -17,32 +17,47 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BuyTicket">
-
-        </activity>
-        <activity android:name=".QRCode">
-
-        </activity>
-        <activity android:name=".UserEvents" />
-        <activity android:name=".UserProfile" />
-        <activity android:name=".CreateEvent">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.projektifiek.etickets.MainActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EventActivity" />
-        <activity android:name=".LoginActivity"
-            android:theme="@style/AppThemeNoActionBar">
-
-        </activity>
-        <activity android:name=".OpeningScreen"
-            android:theme="@style/AppThemeNoActionBar">
-
-        </activity>
-        <activity android:name=".SignUp"
-            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".BuyTicket"
+            android:parentActivityName=".EventActivity" />
+        <activity
+            android:name=".QRCode"
+            android:parentActivityName=".BuyTicket" />
+        <activity
+            android:name=".UserEvents"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".UserProfile"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CreateEvent"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".EventActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".OpeningScreen"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".SignUp"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".MainActivity">
 
         </activity>
