@@ -12,7 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -52,8 +55,18 @@ public class MainActivity extends AppCompatActivity {
 
         lvEvent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Toast.makeText(MainActivity.this, adapteri.data.get(position).getTitle(), Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(getApplicationContext(), EventActivity.class);
+                intent.putExtra("usersToken", usersToken);
+                intent.putExtra("id", adapteri.data.get(position).getId());
+//                intent.putExtra("title", adapteri.data.get(position).getTitle());
+//                intent.putExtra("author", adapteri.data.get(position).getAuthor());
+//                intent.putExtra("date_created", adapteri.data.get(position).getDateCreated());
+//                intent.putExtra("content", adapteri.data.get(position).getContent());
+//                intent.putExtra("price", adapteri.data.get(position).getPrice());
+                startActivity(intent);
             }
         });
 
@@ -88,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             JSONObject jsonObject =
                                     objJsonArray.getJSONObject(i);
-                            int id = jsonObject.getInt("id");
+                            String id = jsonObject.getString("id");
                             String title = jsonObject.getString("title");
                             String author = jsonObject.getString("author");
                             String dateCreated = jsonObject.getString("date_created");
@@ -167,11 +180,33 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+
     }
+
+
 
 //
 //    public void openEvent(View view) {
-//        String item = (String) this.adapteri.getItem(0);
-//        Toast.makeText(this, item, Toast.LENGTH_LONG).show();
+//
+//        ListView lvItems = lvEvent.get;
+//        for (int i=0; i < lvItems.getChildCount(); i++)
+//        {
+//            lvItems.getChildAt(i).setBackgroundColor(Color.BLUE);
+//        }
+//
+//
+//        //get the row the clicked button is in
+//        LinearLayout vwParentRow = (LinearLayout)v.getParent();
+//
+//        TextView child = (TextView)vwParentRow.getChildAt(0);
+//        Button btnChild = (Button)vwParentRow.getChildAt(1);
+//        btnChild.setText(child.getText());
+//        btnChild.setText("I've been clicked!");
+//
+//        int c = Color.CYAN;
+//
+//        vwParentRow.setBackgroundColor(c);
+//        vwParentRow.refreshDrawableState();
 //    }
+
 }

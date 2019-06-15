@@ -84,7 +84,7 @@ public class UserTickets extends AppCompatActivity {
                         {
                             JSONObject jsonObject =
                                     objJsonArray.getJSONObject(i);
-                            int id = jsonObject.getInt("id");
+                            String id = jsonObject.getString("id");
                             String title = jsonObject.getString("title");
                             String author = jsonObject.getString("author");
                             String dateCreated = jsonObject.getString("date_created");

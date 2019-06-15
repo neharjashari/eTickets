@@ -33,7 +33,7 @@ public class EventAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return data.get(i).getId();
+        return Long.parseLong(data.get(i).getId());
     }
 
     @Override

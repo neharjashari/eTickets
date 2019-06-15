@@ -32,7 +32,7 @@ public class EventActivity extends AppCompatActivity {
     TextView priceTextView;
     TextView contentTextView;
 
-    String id = "1";
+    String ticketId = "";
     String title = "";
     String author = "";
     String dateCreated = "";
@@ -54,16 +54,16 @@ public class EventActivity extends AppCompatActivity {
         contentTextView = (TextView) findViewById(R.id.contentTextView);
 
         //TODO: Uncomment this section
-//        Intent intentGetToken = getIntent();
-//        usersToken = intentGetToken.getStringExtra("usersToken");
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+        Intent intentGetToken = getIntent();
+        usersToken = intentGetToken.getStringExtra("usersToken");
+        ticketId = intentGetToken.getStringExtra("id");
+        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Ticket ID: " + ticketId, Toast.LENGTH_SHORT).show();
 
-        //TODO: Important
-//        String id = "1";
 
         Request request = new
                 Request.Builder()
-                .url("http://192.168.179.1:8000/event/" + usersToken + "/" + id)
+                .url("http://192.168.179.1:8000/event/" + usersToken + "/" + ticketId)
                 .get()
                 .build();
         Call call = client.newCall(request);
@@ -89,7 +89,7 @@ public class EventActivity extends AppCompatActivity {
 
                         JSONObject jsonObject = new JSONObject(strJsonResponse);
 
-                        id = jsonObject.getString("id");
+                        ticketId = jsonObject.getString("id");
                         title = jsonObject.getString("title");
                         author = jsonObject.getString("author");
                         dateCreated = jsonObject.getString("date_created");

@@ -2,10 +2,9 @@ package com.projektifiek.etickets;
 
 public class Event {
 
-    private int Id;
-    private String Title, Author, DateCreated, Content, Price;
+    private String Id, Title, Author, DateCreated, Content, Price;
 
-    public Event(int id, String title, String author, String dateCreated, String content, String price) {
+    public Event(String id, String title, String author, String dateCreated, String content, String price) {
         Id = id;
         Title = title;
         Author = author;
@@ -14,11 +13,11 @@ public class Event {
         Price = price;
     }
 
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
     }
 
