@@ -10,13 +10,21 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.UUID;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class SignUp extends AppCompatActivity {
 
@@ -37,6 +45,8 @@ public class SignUp extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btn_signup);
 
         database = new Database(SignUp.this, "usersDB", null, 1);
+        Log.d("DB", database.getDatabaseName());
+
         usersDB = database.getWritableDatabase();
     }
 
@@ -61,14 +71,16 @@ public class SignUp extends AppCompatActivity {
 
 
         try {
-            //TODO: HASH function
-//            String generatedSecuredPasswordHash = generateStrongPasswordHash(password);
+            // Generate HASH
+            String generatedSecuredPasswordHash = generateStrongPasswordHash(password);
 
             ContentValues cv = new ContentValues();
             cv.put("fullname", fullname);
             cv.put("email", email);
-            cv.put("password", password);
-            cv.put("usersToken", token);
+            cv.put("password", generatedSecuredPasswordHash);
+            cv.put("token", token);
+
+            Log.d("DB", generatedSecuredPasswordHash);
 
             long id = usersDB.insert("users", null, cv);
 
@@ -80,20 +92,20 @@ public class SignUp extends AppCompatActivity {
         } catch (SQLiteConstraintException e) {
             Toast.makeText(this, "You already have an accout with this email.", Toast.LENGTH_LONG).show();
         }
-//        catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        } catch (InvalidKeySpecException e) {
-//            e.printStackTrace();
-//        }
+        catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
 
         // TODO: NOTIFICATIONS
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(SignUp.this);
-        mBuilder.setSmallIcon(R.drawable.logo);
-        mBuilder.setContentTitle("Notification Alert - eTickets!");
-        mBuilder.setContentText("Your account has been created successfully.");
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        // notificationID allows you to update the notification later on.
-        mNotificationManager.notify(001, mBuilder.build());
+//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(SignUp.this);
+//        mBuilder.setSmallIcon(R.drawable.logo);
+//        mBuilder.setContentTitle("Notification Alert - eTickets!");
+//        mBuilder.setContentText("Your account has been created successfully.");
+//        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        // notificationID allows you to update the notification later on.
+//        mNotificationManager.notify(001, mBuilder.build());
     }
 
 
@@ -156,37 +168,37 @@ public class SignUp extends AppCompatActivity {
 
     // * Advanced password security using PBKDF2WithHmacSHA1 algorithm * //
 
-//    TODO: HASH functions
-//    private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeySpecException {
-//        int iterations = 1000;
-//        char[] chars = password.toCharArray();
-//        byte[] salt = getSalt();
-//
-//        PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
-//        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-//        byte[] hash = skf.generateSecret(spec).getEncoded();
-//        return iterations + ":" + toHex(salt) + ":" + toHex(hash);
-//    }
-//
-//    private static byte[] getSalt() throws NoSuchAlgorithmException
-//    {
-//        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-//        byte[] salt = new byte[16];
-//        sr.nextBytes(salt);
-//        return salt;
-//    }
-//
-//    private static String toHex(byte[] array) throws NoSuchAlgorithmException
-//    {
-//        BigInteger bi = new BigInteger(1, array);
-//        String hex = bi.toString(16);
-//        int paddingLength = (array.length * 2) - hex.length();
-//        if(paddingLength > 0)
-//        {
-//            return String.format("%0"  +paddingLength + "d", 0) + hex;
-//        }else{
-//            return hex;
-//        }
-//    }
+    // HASH functions
+    private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeySpecException {
+        int iterations = 1000;
+        char[] chars = password.toCharArray();
+        byte[] salt = getSalt();
+
+        PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        return iterations + ":" + toHex(salt) + ":" + toHex(hash);
+    }
+
+    private static byte[] getSalt() throws NoSuchAlgorithmException
+    {
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        byte[] salt = new byte[16];
+        sr.nextBytes(salt);
+        return salt;
+    }
+
+    private static String toHex(byte[] array) throws NoSuchAlgorithmException
+    {
+        BigInteger bi = new BigInteger(1, array);
+        String hex = bi.toString(16);
+        int paddingLength = (array.length * 2) - hex.length();
+        if(paddingLength > 0)
+        {
+            return String.format("%0"  +paddingLength + "d", 0) + hex;
+        }else{
+            return hex;
+        }
+    }
 
 }

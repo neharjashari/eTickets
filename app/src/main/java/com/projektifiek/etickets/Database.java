@@ -14,7 +14,6 @@ public class Database extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users" +
                 "(id integer primary key, fullname VARCHAR, email VARCHAR unique, password VARCHAR, token VARCHAR);");
-
     }
 
     @Override

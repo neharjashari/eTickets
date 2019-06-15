@@ -13,6 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 
 public class LoginActivity extends AppCompatActivity{
 
@@ -47,7 +53,13 @@ public class LoginActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View v) {
-                login();
+                try {
+                    login();
+                } catch (InvalidKeySpecException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -62,7 +74,7 @@ public class LoginActivity extends AppCompatActivity{
         });
     }
 
-    public void login() {
+    public void login() throws InvalidKeySpecException, NoSuchAlgorithmException {
         Log.d(TAG, "Login");
 
         if (!validate()) {
@@ -83,18 +95,12 @@ public class LoginActivity extends AppCompatActivity{
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        //        //TODO: me vendos ku duhet funksionin e Hash-it
-//        String passwordDB = generateStrongPasswordHash(password);
-//
-//        boolean matched = validatePassword("password", passwordDB);
-//        if (!matched) {
-//          return;
-//        }
 
         // Authentication logic here.
         String passwordDB = searchPassword(email);
         Log.w("myApp", "DB password: " + passwordDB);
-        if(!password.equals(passwordDB)) {
+//        if(!password.equals(passwordDB)) {
+        if(!validatePassword(password, passwordDB)) {
             new android.os.Handler().postDelayed(
                     new Runnable() {
                         public void run() {
@@ -233,34 +239,35 @@ public class LoginActivity extends AppCompatActivity{
     }
 
 
-//      TODO: HASH validation
-//    private static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException
-//    {
-//        String[] parts = storedPassword.split(":");
-//        int iterations = Integer.parseInt(parts[0]);
-//        byte[] salt = fromHex(parts[1]);
-//        byte[] hash = fromHex(parts[2]);
-//
-//        PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
-//        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-//        byte[] testHash = skf.generateSecret(spec).getEncoded();
-//
-//        int diff = hash.length ^ testHash.length;
-//        for(int i = 0; i < hash.length && i < testHash.length; i++)
-//        {
-//            diff |= hash[i] ^ testHash[i];
-//        }
-//        return diff == 0;
-//    }
-//    private static byte[] fromHex(String hex) throws NoSuchAlgorithmException
-//    {
-//        byte[] bytes = new byte[hex.length() / 2];
-//        for(int i = 0; i<bytes.length ;i++)
-//        {
-//            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
-//        }
-//        return bytes;
-//    }
+
+    // HASH validation
+    private static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        String[] parts = storedPassword.split(":");
+        int iterations = Integer.parseInt(parts[0]);
+        byte[] salt = fromHex(parts[1]);
+        byte[] hash = fromHex(parts[2]);
+
+        PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] testHash = skf.generateSecret(spec).getEncoded();
+
+        int diff = hash.length ^ testHash.length;
+        for(int i = 0; i < hash.length && i < testHash.length; i++)
+        {
+            diff |= hash[i] ^ testHash[i];
+        }
+        return diff == 0;
+    }
+    private static byte[] fromHex(String hex) throws NoSuchAlgorithmException
+    {
+        byte[] bytes = new byte[hex.length() / 2];
+        for(int i = 0; i<bytes.length ;i++)
+        {
+            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+        }
+        return bytes;
+    }
 
 
 
