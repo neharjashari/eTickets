@@ -27,10 +27,17 @@ public class EventActivity extends AppCompatActivity {
     OkHttpClient client = new OkHttpClient();
 
     TextView titleTextView;
-    TextView dataCreatedTextView;
+    TextView dateCreatedTextView;
     TextView authorTextView;
     TextView priceTextView;
     TextView contentTextView;
+
+    String id = "1";
+    String title = "";
+    String author = "";
+    String dateCreated = "";
+    String content = "";
+    String price = "";
 
     // TODO: set the usersToken as an empty string, this will be set later by LoginActivity
     public String usersToken = "6cfd3c6d-2df0-4d01-b6a6-2fc2e686bb14";
@@ -41,7 +48,7 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
 
         titleTextView = (TextView) findViewById(R.id.titleTextView);
-        dataCreatedTextView = (TextView) findViewById(R.id.dateCreatedTextView);
+        dateCreatedTextView = (TextView) findViewById(R.id.dateCreatedTextView);
         authorTextView = (TextView) findViewById(R.id.authorTextView);
         priceTextView = (TextView) findViewById(R.id.priceTextView);
         contentTextView = (TextView) findViewById(R.id.contentTextView);
@@ -52,7 +59,7 @@ public class EventActivity extends AppCompatActivity {
         Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         //TODO: Important
-        String id = "1";
+//        String id = "1";
 
         Request request = new
                 Request.Builder()
@@ -82,12 +89,12 @@ public class EventActivity extends AppCompatActivity {
 
                         JSONObject jsonObject = new JSONObject(strJsonResponse);
 
-                        int id = jsonObject.getInt("id");
-                        final String title = jsonObject.getString("title");
-                        final String author = jsonObject.getString("author");
-                        final String dateCreated = jsonObject.getString("date_created");
-                        final String content = jsonObject.getString("content");
-                        final String price = jsonObject.getString("price");
+                        id = jsonObject.getString("id");
+                        title = jsonObject.getString("title");
+                        author = jsonObject.getString("author");
+                        dateCreated = jsonObject.getString("date_created");
+                        content = jsonObject.getString("content");
+                        price = jsonObject.getString("price");
 
                         Log.w("JSON: ", "The JSON values saved.");
                         Log.w("JSON: ", "Values: { " + title + ", " + author + ", " + dateCreated + ", " + content + ", " + price + " }");
@@ -101,7 +108,7 @@ public class EventActivity extends AppCompatActivity {
 
                                 // Stuff that updates the UI (the variables are set as final, it doesn't work in any other way)
                                 titleTextView.setText(title);
-                                dataCreatedTextView.setText("Date Created: " + dateCreated);
+                                dateCreatedTextView.setText("Date Created: " + dateCreated);
                                 authorTextView.setText("Author: " + author);
                                 priceTextView.setText("Price: " + price + " €");
                                 contentTextView.setText(content);
@@ -125,11 +132,11 @@ public class EventActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), BuyTicket.class);
         intent.putExtra("usersToken", usersToken);
         intent.putExtra("id", "1");
-        intent.putExtra("title", titleTextView.getText());
-        intent.putExtra("author", authorTextView.getText());
-        intent.putExtra("date_created", dataCreatedTextView.getText());
-        intent.putExtra("content", contentTextView.getText());
-        intent.putExtra("price", priceTextView.getText());
+        intent.putExtra("title", title);
+        intent.putExtra("author", author);
+        intent.putExtra("date_created", dateCreated);
+        intent.putExtra("content", content);
+        intent.putExtra("price", price);
         startActivity(intent);
     }
 

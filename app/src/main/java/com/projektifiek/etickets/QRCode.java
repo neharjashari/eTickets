@@ -87,7 +87,7 @@ public class QRCode extends AppCompatActivity {
         boughtTicketPrice = intentGetToken.getStringExtra("price");
         Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
-        edtValue.setText(boughtTicketTitle + boughtTicketId);
+        edtValue.setText(boughtTicketTitle + boughtTicketId + boughtTicketDateCreated);
 
         generateQrCode();
 
