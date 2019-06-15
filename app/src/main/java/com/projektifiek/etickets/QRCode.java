@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -61,8 +64,6 @@ public class QRCode extends AppCompatActivity {
     public String boughtTicketContent = "";
     public String boughtTicketPrice = "";
 
-    private Database database;
-    private SQLiteDatabase usersDB;
 
     String URL = "";
 
@@ -84,23 +85,23 @@ public class QRCode extends AppCompatActivity {
         boughtTicketDateCreated = intentGetToken.getStringExtra("date_created");
         boughtTicketContent = intentGetToken.getStringExtra("content");
         boughtTicketPrice = intentGetToken.getStringExtra("price");
-//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+
+        edtValue.setText(boughtTicketTitle + boughtTicketId);
 
         generateQrCode();
 
         tvMessage.setVisibility(TextView.VISIBLE);
 
-        // TODO: NOTIFICATIONS
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(QRCode.this);
-        mBuilder.setSmallIcon(R.drawable.logo);
-        mBuilder.setContentTitle("Notification Alert - eTickets!");
-        mBuilder.setContentText("The QR code for you ticket has been generated.");
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        // notificationID allows you to update the notification later on.
-        mNotificationManager.notify(001, mBuilder.build());
+//        // TODO: NOTIFICATIONS
+//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(QRCode.this);
+//        mBuilder.setSmallIcon(R.drawable.logo);
+//        mBuilder.setContentTitle("Notification Alert - eTickets!");
+//        mBuilder.setContentText("The QR code for you ticket has been generated.");
+//        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        // notificationID allows you to update the notification later on.
+//        mNotificationManager.notify(001, mBuilder.build());
 
-        database = new Database(QRCode.this, "usersDB", null, 1);
-        usersDB = database.getWritableDatabase();
 
         URL = "http://192.168.179.1:8000/event/" + usersToken + "/tickets";
 
@@ -108,7 +109,7 @@ public class QRCode extends AppCompatActivity {
 
 
     public void generateQrCode() {
-        inputValue = edtValue.getText().toString().trim() + randomAlphaNumeric(5);
+        inputValue = edtValue.getText().toString().trim();
         Toast.makeText(this, "QR code generated for: \"" + inputValue + "\"", Toast.LENGTH_LONG).show();
 
         if (inputValue.length() > 0) {
@@ -137,15 +138,15 @@ public class QRCode extends AppCompatActivity {
     }
 
 
-    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    public static String randomAlphaNumeric(int count) {
-        StringBuilder builder = new StringBuilder();
-        while (count-- != 0) {
-            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-        }
-        return builder.toString();
-    }
+//    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//    public static String randomAlphaNumeric(int count) {
+//        StringBuilder builder = new StringBuilder();
+//        while (count-- != 0) {
+//            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+//            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+//        }
+//        return builder.toString();
+//    }
 
     public void openMainActivity(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -165,13 +166,6 @@ public class QRCode extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        usersDB.close();
-        super.onDestroy();
     }
 
 
@@ -267,6 +261,59 @@ public class QRCode extends AppCompatActivity {
         writer.flush();
         writer.close();
         os.close();
+    }
+
+
+
+    /*MENU*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+            case R.id.menu_add_event:
+                Intent intentAddEvent = new Intent(getApplicationContext(), CreateEvent.class);
+                intentAddEvent.putExtra("usersToken", usersToken);
+                startActivity(intentAddEvent);
+                return true;
+            case R.id.menu_home:
+                Intent intentOpenMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                intentOpenMainActivity.putExtra("usersToken", usersToken);
+                startActivity(intentOpenMainActivity);
+                return true;
+            case R.id.menu_user_profile:
+                Intent intentOpenUserProfile = new Intent(getApplicationContext(), UserProfile.class);
+                intentOpenUserProfile.putExtra("usersToken", usersToken);
+                startActivity(intentOpenUserProfile);
+                return true;
+            case R.id.menu_events:
+                Intent intentOpenUserEvents = new Intent(getApplicationContext(), UserEvents.class);
+                intentOpenUserEvents.putExtra("usersToken", usersToken);
+                startActivity(intentOpenUserEvents);
+                return true;
+            case R.id.menu_tickets:
+                Intent intentOpenUserTickets = new Intent(getApplicationContext(), UserTickets.class);
+                intentOpenUserTickets.putExtra("usersToken", usersToken);
+                startActivity(intentOpenUserTickets);
+                return true;
+            case R.id.menu_settings:
+//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+////                intentSettings.putExtra("usersToken", usersToken);
+//                startActivity(intentSettings);
+                return true;
+            case R.id.menu_exit_the_app:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

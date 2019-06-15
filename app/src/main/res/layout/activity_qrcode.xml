@@ -12,7 +12,7 @@
         android:id="@+id/edt_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Titulli i Eventit + 1 random string"
+        android:text="Titulli i Eventit + ID-ja e eventit"
         android:textSize="20sp"/>
 
     <ImageView

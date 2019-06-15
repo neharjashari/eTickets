@@ -15,10 +15,6 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users" +
                 "(id integer primary key, fullname VARCHAR, email VARCHAR unique, password VARCHAR, token VARCHAR);");
 
-        // TODO: FOREIGN KEY - can a foreign key be a multiple value key in this table
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS usersTicket" +
-                "(userToken VARCHAR, titulliEventit VARCHAR," +
-                "FOREIGN KEY (userToken) REFERENCES users(token));");
     }
 
     @Override

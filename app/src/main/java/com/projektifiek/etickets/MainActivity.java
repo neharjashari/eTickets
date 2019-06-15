@@ -33,15 +33,17 @@ public class MainActivity extends AppCompatActivity {
     OkHttpClient client = new OkHttpClient();
     EventAdapter adapteri;
 
-    public String usersToken = "";
+    // TODO: set the usersToken as an empty string, this will be set later by LoginActivity
+    public String usersToken = "6cfd3c6d-2df0-4d01-b6a6-2fc2e686bb14";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intentGetToken = getIntent();
-        usersToken = intentGetToken.getStringExtra("usersToken");
+        //TODO: Uncomment this section
+//        Intent intentGetToken = getIntent();
+//        usersToken = intentGetToken.getStringExtra("usersToken");
         Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         lvEvent = findViewById(R.id.lvEvent);
@@ -167,5 +169,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+//
+//    public void openEvent(View view) {
+//        String item = (String) this.adapteri.getItem(0);
+//        Toast.makeText(this, item, Toast.LENGTH_LONG).show();
+//    }
 }

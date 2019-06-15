@@ -17,12 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserTickets">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".UserTickets"
+            android:parentActivityName=".MainActivity" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".BuyTicket"
@@ -41,10 +38,18 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".EventActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/AppThemeNoActionBar">
+
+        </activity>
         <activity
             android:name=".OpeningScreen"
             android:theme="@style/AppThemeNoActionBar" />
@@ -52,7 +57,9 @@
             android:name=".SignUp"
             android:parentActivityName=".LoginActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>

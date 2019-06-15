@@ -8,6 +8,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -86,19 +89,19 @@ public class CreateEvent extends AppCompatActivity {
             }
         }.execute();
 
-        // TODO: NOTIFICATIONS
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(CreateEvent.this);
-        mBuilder.setSmallIcon(R.drawable.logo);
-        mBuilder.setContentTitle("Notification Alert - eTickets!");
-        mBuilder.setContentText("The QR code for you ticket has been generated.");
+//        // TODO: NOTIFICATIONS
+//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(CreateEvent.this);
+//        mBuilder.setSmallIcon(R.drawable.logo);
+//        mBuilder.setContentTitle("Notification Alert - eTickets!");
+//        mBuilder.setContentText("The QR code for you ticket has been generated.");
 
-        Intent intent = new Intent(CreateEvent.this, MainActivity.class);
-        intent.putExtra("usersToken", usersToken);
-        startActivity(intent);
+//        Intent intent = new Intent(CreateEvent.this, MainActivity.class);
+//        intent.putExtra("usersToken", usersToken);
+//        startActivity(intent);
 
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        // notificationID allows you to update the notification later on.
-        mNotificationManager.notify(001, mBuilder.build());
+//        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        // notificationID allows you to update the notification later on.
+//        mNotificationManager.notify(001, mBuilder.build());
     }
 
 
@@ -113,7 +116,7 @@ public class CreateEvent extends AppCompatActivity {
         conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
         // 2. build JSON object
-        JSONObject jsonObject = buidJsonObject();
+        JSONObject jsonObject = buildJsonObject();
 
         // 3. add JSON content to POST request body
         setPostRequestContent(conn, jsonObject);
@@ -127,7 +130,7 @@ public class CreateEvent extends AppCompatActivity {
     }
 
 
-    private JSONObject buidJsonObject() throws JSONException {
+    private JSONObject buildJsonObject() throws JSONException {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.accumulate("id", generateRandomNumber());
@@ -174,6 +177,57 @@ public class CreateEvent extends AppCompatActivity {
         return randNum;
     }
 
+
+    /*MENU*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+            case R.id.menu_add_event:
+                Intent intentAddEvent = new Intent(getApplicationContext(), CreateEvent.class);
+                intentAddEvent.putExtra("usersToken", usersToken);
+                startActivity(intentAddEvent);
+                return true;
+            case R.id.menu_home:
+                Intent intentOpenMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                intentOpenMainActivity.putExtra("usersToken", usersToken);
+                startActivity(intentOpenMainActivity);
+                return true;
+            case R.id.menu_user_profile:
+                Intent intentOpenUserProfile = new Intent(getApplicationContext(), UserProfile.class);
+                intentOpenUserProfile.putExtra("usersToken", usersToken);
+                startActivity(intentOpenUserProfile);
+                return true;
+            case R.id.menu_events:
+                Intent intentOpenUserEvents = new Intent(getApplicationContext(), UserEvents.class);
+                intentOpenUserEvents.putExtra("usersToken", usersToken);
+                startActivity(intentOpenUserEvents);
+                return true;
+            case R.id.menu_tickets:
+                Intent intentOpenUserTickets = new Intent(getApplicationContext(), UserTickets.class);
+                intentOpenUserTickets.putExtra("usersToken", usersToken);
+                startActivity(intentOpenUserTickets);
+                return true;
+            case R.id.menu_settings:
+//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+////                intentSettings.putExtra("usersToken", usersToken);
+//                startActivity(intentSettings);
+                return true;
+            case R.id.menu_exit_the_app:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }
 
