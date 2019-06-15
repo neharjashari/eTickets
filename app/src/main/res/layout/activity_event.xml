@@ -14,93 +14,98 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="309dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="50dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="24sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="59dp"
-            tools:text="Titulli" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/dateCreatedTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:text="TextView"
-            android:textAlignment="textEnd"
-            app:layout_constraintEnd_toEndOf="@+id/authorTextView"
-            app:layout_constraintTop_toBottomOf="@id/titleTextView"
-            tools:text="Date Created: " />
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="309dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="50dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="24sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="51dp"
+                tools:layout_editor_absoluteY="59dp"
+                tools:text="Titulli" />
 
-        <TextView
-            android:id="@+id/authorTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="23dp"
-            android:layout_marginRight="50dp"
-            android:text="TextView"
-            android:textAlignment="textEnd"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dateCreatedTextView"
-            tools:text="Author:" />
+            <TextView
+                android:id="@+id/dateCreatedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="TextView"
+                android:textAlignment="textEnd"
+                app:layout_constraintEnd_toEndOf="@+id/authorTextView"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                tools:text="Date Created: " />
 
-        <TextView
-            android:id="@+id/priceTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:text="TextView"
-            android:textAlignment="textEnd"
-            android:textColor="@color/colorAccent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleTextView"
-            tools:text="Price:" />
+            <TextView
+                android:id="@+id/authorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginRight="50dp"
+                android:text="TextView"
+                android:textAlignment="textEnd"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dateCreatedTextView"
+                tools:text="Author:" />
 
-        <ImageView
-            android:id="@+id/photoImageView"
-            android:layout_width="343dp"
-            android:layout_height="259dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/authorTextView"
-            app:srcCompat="@drawable/event3" />
+            <TextView
+                android:id="@+id/priceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="TextView"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                tools:text="Price:" />
+
+            <ImageView
+                android:id="@+id/photoImageView"
+                android:layout_width="343dp"
+                android:layout_height="259dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/authorTextView"
+                app:srcCompat="@drawable/event3" />
 
 
-        <TextView
-            android:id="@+id/contentTextView"
-            android:layout_width="324dp"
-            android:layout_height="167dp"
-            android:layout_marginTop="20dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photoImageView" />
+            <TextView
+                android:id="@+id/contentTextView"
+                android:layout_width="324dp"
+                android:layout_height="167dp"
+                android:layout_marginTop="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photoImageView" />
 
-        <Button
-            android:id="@+id/btnBuyTicket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#00BCD4"
-            android:onClick="openBuyTicketActivity"
-            android:text="Buy Ticket"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contentTextView"
-            tools:layout_editor_absoluteX="161dp"
-            tools:layout_editor_absoluteY="629dp" />
+            <Button
+                android:id="@+id/btnBuyTicket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#00BCD4"
+                android:onClick="openBuyTicketActivity"
+                android:text="Buy Ticket"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contentTextView"
+                tools:layout_editor_absoluteX="161dp"
+                tools:layout_editor_absoluteY="629dp" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
