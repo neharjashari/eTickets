@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -46,6 +48,7 @@ import androidmads.library.qrgenearator.QRGSaver;
 
 public class QRCode extends AppCompatActivity {
 
+    private static final String CHANNEL_ID = "001";
     String TAG = "GenerateQRCode";
     TextView edtValue;
     ImageView qrImage;
@@ -93,18 +96,28 @@ public class QRCode extends AppCompatActivity {
 
         tvMessage.setVisibility(TextView.VISIBLE);
 
-//        // TODO: NOTIFICATIONS
-//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(QRCode.this);
-//        mBuilder.setSmallIcon(R.drawable.logo);
-//        mBuilder.setContentTitle("Notification Alert - eTickets!");
-//        mBuilder.setContentText("The QR code for you ticket has been generated.");
-//        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//        // notificationID allows you to update the notification later on.
-//        mNotificationManager.notify(001, mBuilder.build());
-
+        notification();
 
         URL = "http://192.168.179.1:8000/event/" + usersToken + "/tickets";
 
+    }
+
+
+    public void notification() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("The QR code for you event has been generated.")
+                .setContentText("Use this QR code as a ticket for the event.")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Use this QR code as a ticket for the event."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        int notificationId = 0;
+        notificationManager.notify(notificationId, builder.build());
     }
 
 
@@ -196,19 +209,6 @@ public class QRCode extends AppCompatActivity {
             }
         }.execute();
 
-//        // TODO: NOTIFICATIONS
-//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(CreateEvent.this);
-//        mBuilder.setSmallIcon(R.drawable.logo);
-//        mBuilder.setContentTitle("Notification Alert - eTickets!");
-//        mBuilder.setContentText("The QR code for you ticket has been generated.");
-//
-//        Intent intent = new Intent(CreateEvent.this, MainActivity.class);
-//        intent.putExtra("usersToken", usersToken);
-//        startActivity(intent);
-//
-//        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//        // notificationID allows you to update the notification later on.
-//        mNotificationManager.notify(001, mBuilder.build());
     }
 
 

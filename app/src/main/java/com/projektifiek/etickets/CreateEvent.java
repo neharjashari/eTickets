@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -34,6 +36,7 @@ import okhttp3.OkHttpClient;
 
 public class CreateEvent extends AppCompatActivity {
 
+    private static final String CHANNEL_ID = "001";
     OkHttpClient client = new OkHttpClient();
 
     EditText _title;
@@ -89,19 +92,25 @@ public class CreateEvent extends AppCompatActivity {
             }
         }.execute();
 
-//        // TODO: NOTIFICATIONS
-//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(CreateEvent.this);
-//        mBuilder.setSmallIcon(R.drawable.logo);
-//        mBuilder.setContentTitle("Notification Alert - eTickets!");
-//        mBuilder.setContentText("The QR code for you ticket has been generated.");
+        notification();
+    }
 
-//        Intent intent = new Intent(CreateEvent.this, MainActivity.class);
-//        intent.putExtra("usersToken", usersToken);
-//        startActivity(intent);
 
-//        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//        // notificationID allows you to update the notification later on.
-//        mNotificationManager.notify(001, mBuilder.build());
+    public void notification() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Your event has been created")
+                .setContentText("Your event has been created in the app. You can see it anytime in the Your Events page.")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Your event has been created in the app. You can see it anytime in the Your Events page."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        int notificationId = 0;
+        notificationManager.notify(notificationId, builder.build());
     }
 
 

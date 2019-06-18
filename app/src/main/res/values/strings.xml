@@ -26,4 +26,6 @@
 
     <!-- Sync Preferences -->
     <string name="notifications_title">Allow notifications</string>
+    <string name="channel_name">channelName</string>
+    <string name="channel_description">channelDescription</string>
 </resources>

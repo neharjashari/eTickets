@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 public class UserProfile extends AppCompatActivity {
 
+    private static final String CHANNEL_ID = "001";
     private Database database;
     private SQLiteDatabase usersDB;
 
@@ -77,8 +81,30 @@ public class UserProfile extends AppCompatActivity {
     public void deleteUser(View view) {
 
         // TODO: delete user and logout from the app, go to LoginActivity
+
+
+
+        // Notify user
+        notification();
     }
 
+
+    public void notification() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Your account has been deleted.")
+                .setContentText("Your account has been deleted. You cannot enter the app with that account.")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Your account has been deleted. You cannot enter the app with that account."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        int notificationId = 0;
+        notificationManager.notify(notificationId, builder.build());
+    }
 
 
     /*MENU*/

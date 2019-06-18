@@ -7,6 +7,8 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
@@ -20,6 +22,7 @@ import com.braintreepayments.cardform.view.CardForm;
 
 public class BuyTicket extends AppCompatActivity {
 
+    private static final String CHANNEL_ID = "001";
     public String usersToken = "";
     public String boughtTicketId = "";
     public String boughtTicketTitle = "";
@@ -95,20 +98,32 @@ public class BuyTicket extends AppCompatActivity {
                     AlertDialog alertDialog = alertBuilder.create();
                     alertDialog.show();
 
-//                    // TODO: NOTIFICATIONS
-//                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(BuyTicket.this);
-//                    mBuilder.setSmallIcon(R.drawable.logo);
-//                    mBuilder.setContentTitle("Notification Alert - eTickets!");
-//                    mBuilder.setContentText("You have successfully purchased the ticket for this event.");
-//                    NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//                    // notificationID allows you to update the notification later on.
-//                    mNotificationManager.notify(001, mBuilder.build());
+                    notification();
 
                 } else {
                     Toast.makeText(BuyTicket.this, "Please complete the form", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+    }
+
+
+    public void notification() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Your ticket has been purchased.")
+                .setContentText("Your ticket has been purchased successfully. You can see it anytime in the Your Tickets page.")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Your ticket has been purchased successfully. You can see it anytime in the Your Tickets page."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        int notificationId = 0;
+        notificationManager.notify(notificationId, builder.build());
     }
 
 

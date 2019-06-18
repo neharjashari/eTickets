@@ -1,6 +1,7 @@
 package com.projektifiek.etickets;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import androidx.core.app.NotificationCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -28,6 +31,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class SignUp extends AppCompatActivity {
 
+    private static final String CHANNEL_ID = "001";
     private Database database;
     private SQLiteDatabase usersDB;
 
@@ -86,26 +90,38 @@ public class SignUp extends AppCompatActivity {
 
             Toast.makeText(this, "Account ID: " + String.valueOf(id), Toast.LENGTH_LONG).show();
 
+            // Send notification
+            notification();
+
             Intent intentLogin = new Intent(SignUp.this, LoginActivity.class);
             startActivity(intentLogin);
 
         } catch (SQLiteConstraintException e) {
             Toast.makeText(this, "You already have an accout with this email.", Toast.LENGTH_LONG).show();
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
 
-        // TODO: NOTIFICATIONS
-//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(SignUp.this);
-//        mBuilder.setSmallIcon(R.drawable.logo);
-//        mBuilder.setContentTitle("Notification Alert - eTickets!");
-//        mBuilder.setContentText("Your account has been created successfully.");
-//        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//        // notificationID allows you to update the notification later on.
-//        mNotificationManager.notify(001, mBuilder.build());
+    }
+
+
+    public void notification() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Your account has been created")
+                .setContentText("Your account for eTickets application has been created. Now you can enter the app.")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Your account for eTickets application has been created. Now you can enter the app."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        int notificationId = 0;
+        notificationManager.notify(notificationId, builder.build());
     }
 
 
