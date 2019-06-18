@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_settings:
 //                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-////                intentSettings.putExtra("usersToken", usersToken);
+//                intentSettings.putExtra("usersToken", usersToken);
 //                startActivity(intentSettings);
                 return true;
             case R.id.menu_exit_the_app:
@@ -181,31 +181,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
-
-//
-//    public void openEvent(View view) {
-//
-//        ListView lvItems = lvEvent.get;
-//        for (int i=0; i < lvItems.getChildCount(); i++)
-//        {
-//            lvItems.getChildAt(i).setBackgroundColor(Color.BLUE);
-//        }
-//
-//
-//        //get the row the clicked button is in
-//        LinearLayout vwParentRow = (LinearLayout)v.getParent();
-//
-//        TextView child = (TextView)vwParentRow.getChildAt(0);
-//        Button btnChild = (Button)vwParentRow.getChildAt(1);
-//        btnChild.setText(child.getText());
-//        btnChild.setText("I've been clicked!");
-//
-//        int c = Color.CYAN;
-//
-//        vwParentRow.setBackgroundColor(c);
-//        vwParentRow.refreshDrawableState();
-//    }
 
 }

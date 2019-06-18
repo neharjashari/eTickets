@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity{
         });
     }
 
+
     public void login() throws InvalidKeySpecException, NoSuchAlgorithmException {
         Log.d(TAG, "Login");
 
@@ -99,7 +100,8 @@ public class LoginActivity extends AppCompatActivity{
         // Authentication logic here.
         String passwordDB = searchPassword(email);
         Log.w("myApp", "DB password: " + passwordDB);
-//        if(!password.equals(passwordDB)) {
+
+        // Validate password using HASH function
         if(!validatePassword(password, passwordDB)) {
             new android.os.Handler().postDelayed(
                     new Runnable() {

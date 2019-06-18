@@ -51,6 +51,7 @@ public class UserProfile extends AppCompatActivity {
     }
 
 
+    // Getting the user data from DB to show in this activity
     public void getUserData(String token) {
 
         usersDB = database.getReadableDatabase();
@@ -78,6 +79,7 @@ public class UserProfile extends AppCompatActivity {
     }
 
 
+    // Deleting the user from DB
     public void deleteUser(View view) {
 
         // TODO: delete user and logout from the app, go to LoginActivity

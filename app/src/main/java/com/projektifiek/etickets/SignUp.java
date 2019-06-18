@@ -61,6 +61,7 @@ public class SignUp extends AppCompatActivity {
     }
 
 
+    // Save account and user's info in the DB
     public void createAccount(View view) {
         // Get the contact name and email entered
         String fullname = fullnameEditText.getText().toString();
@@ -109,6 +110,7 @@ public class SignUp extends AppCompatActivity {
     }
 
 
+    // The function to send notifications from the app, in this case to notify the user that their account has been created.
     public void notification() {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -143,7 +145,7 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-    // This function generates unique tokens for every user
+    // This function generates unique tokens for every user, it uses the UUID from Java libraries
     public String createToken() {
         String uuid = UUID.randomUUID().toString();
 //        uuid.replace("-", "");
@@ -151,6 +153,7 @@ public class SignUp extends AppCompatActivity {
     }
 
 
+    // Validate the data written from the user
     public boolean validate() {
         boolean valid = true;
 
@@ -184,7 +187,8 @@ public class SignUp extends AppCompatActivity {
 
 
 
-    // * Advanced password security using PBKDF2WithHmacSHA1 algorithm * //
+    //  Advanced password security using PBKDF2WithHmacSHA1 algorithm
+    // (https://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/) //
 
     // HASH functions
     private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeySpecException {
