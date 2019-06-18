@@ -43,7 +43,7 @@ public class UserProfile extends AppCompatActivity {
 
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         _userToken.setText(usersToken);
 

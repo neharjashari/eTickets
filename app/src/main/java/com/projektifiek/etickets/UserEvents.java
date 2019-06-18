@@ -95,6 +95,7 @@ public class UserEvents extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Toast.makeText(UserEvents.this, "Error: Fetching the JSON data.", Toast.LENGTH_SHORT).show();
                     }
                     finally {
                         runOnUiThread(new Runnable() {

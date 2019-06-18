@@ -88,7 +88,7 @@ public class SignUp extends AppCompatActivity {
 
             long id = usersDB.insert("users", null, cv);
 
-            Toast.makeText(this, "Account ID: " + String.valueOf(id), Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "Account ID: " + String.valueOf(id), Toast.LENGTH_LONG).show();
 
             // Send notification
             notification();
@@ -100,8 +100,10 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(this, "You already have an accout with this email.", Toast.LENGTH_LONG).show();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+            Toast.makeText(SignUp.this, "Error: Creating Account.", Toast.LENGTH_SHORT).show();
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
+            Toast.makeText(SignUp.this, "Error: Creating Account.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -170,8 +172,8 @@ public class SignUp extends AppCompatActivity {
             emailEditText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            passwordEditText.setError("between 4 and 10 alphanumeric characters");
+        if (password.isEmpty() || password.length() < 6) {
+            passwordEditText.setError("at least 6 characters");
             valid = false;
         } else {
             passwordEditText.setError(null);

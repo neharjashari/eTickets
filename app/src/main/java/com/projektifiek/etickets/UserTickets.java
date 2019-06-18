@@ -40,7 +40,7 @@ public class UserTickets extends AppCompatActivity {
 
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         lvUserEvents = findViewById(R.id.lvUserEvents);
         adapteri = new EventAdapter(UserTickets.this);
@@ -96,6 +96,7 @@ public class UserTickets extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Toast.makeText(UserTickets.this, "Error: Fetching the JSON data.", Toast.LENGTH_SHORT).show();
                     }
                     finally {
                         runOnUiThread(new Runnable() {

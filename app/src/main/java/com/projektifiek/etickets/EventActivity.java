@@ -39,8 +39,7 @@ public class EventActivity extends AppCompatActivity {
     String content = "";
     String price = "";
 
-    // TODO: set the usersToken as an empty string, this will be set later by LoginActivity
-    public String usersToken = "6cfd3c6d-2df0-4d01-b6a6-2fc2e686bb14";
+    public String usersToken = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +52,10 @@ public class EventActivity extends AppCompatActivity {
         priceTextView = (TextView) findViewById(R.id.priceTextView);
         contentTextView = (TextView) findViewById(R.id.contentTextView);
 
-        //TODO: Uncomment this section
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
         ticketId = intentGetToken.getStringExtra("id");
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Ticket ID: " + ticketId, Toast.LENGTH_SHORT).show();
 
 
@@ -118,8 +116,9 @@ public class EventActivity extends AppCompatActivity {
                         Log.w("JSON: ", "Values set to TextViews.");
 
                         } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                            e.printStackTrace();
+                            Toast.makeText(EventActivity.this, "Error: Fetching the JSON data.", Toast.LENGTH_SHORT).show();
+                        }
 
                 }
             }

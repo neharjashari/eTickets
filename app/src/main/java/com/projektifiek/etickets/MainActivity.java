@@ -36,18 +36,16 @@ public class MainActivity extends AppCompatActivity {
     OkHttpClient client = new OkHttpClient();
     EventAdapter adapteri;
 
-    // TODO: set the usersToken as an empty string, this will be set later by LoginActivity
-    public String usersToken = "6cfd3c6d-2df0-4d01-b6a6-2fc2e686bb14";
+    public String usersToken = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO: Uncomment this section
-//        Intent intentGetToken = getIntent();
-//        usersToken = intentGetToken.getStringExtra("usersToken");
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+        Intent intentGetToken = getIntent();
+        usersToken = intentGetToken.getStringExtra("usersToken");
+//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         lvEvent = findViewById(R.id.lvEvent);
         adapteri = new EventAdapter(MainActivity.this);
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         lvEvent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Toast.makeText(MainActivity.this, adapteri.data.get(position).getTitle(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this, adapteri.data.get(position).getTitle(), Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getApplicationContext(), EventActivity.class);
                 intent.putExtra("usersToken", usersToken);
@@ -113,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Toast.makeText(MainActivity.this, "Error: Fetching the JSON data.", Toast.LENGTH_SHORT).show();
                     }
                     finally {
                         runOnUiThread(new Runnable() {
