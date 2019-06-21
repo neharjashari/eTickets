@@ -114,7 +114,7 @@ public class CreateEvent extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Your event has been created")
-                .setContentText("An event with the title: " + _title + "has been created in the app. You can see it anytime in the Your Events page.")
+                .setContentText("Everyone can buy tickets for this event and you can see the info for it anytime in the Your Events page.")
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("Your event has been created in the app. You can see it anytime in the Your Events page."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);

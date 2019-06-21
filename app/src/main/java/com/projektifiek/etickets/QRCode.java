@@ -100,6 +100,8 @@ public class QRCode extends AppCompatActivity {
 
         URL = "http://192.168.179.1:8000/event/" + usersToken + "/tickets";
 
+        // Save the bought ticket in the back end server
+        addToBackEnd();
     }
 
 
@@ -123,7 +125,6 @@ public class QRCode extends AppCompatActivity {
 
     public void generateQrCode() {
         inputValue = edtValue.getText().toString().trim();
-//        inputValue = "hsdfhlsdlhfskldfhksdklfhsdfsdlfkhs";
         Toast.makeText(this, "QR code generated for: \"" + inputValue + "\"", Toast.LENGTH_LONG).show();
 
         if (inputValue.length() > 0) {
@@ -175,7 +176,7 @@ public class QRCode extends AppCompatActivity {
 
     // Add to bought tickets in Back End
 
-    public void addToBackEnd(View view) {
+    public void addToBackEnd() {
         new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground (String...urls){
@@ -241,8 +242,7 @@ public class QRCode extends AppCompatActivity {
     }
 
 
-    private void setPostRequestContent(HttpURLConnection conn,
-                                       JSONObject jsonObject) throws IOException {
+    private void setPostRequestContent(HttpURLConnection conn, JSONObject jsonObject) throws IOException {
 
         OutputStream os = conn.getOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
