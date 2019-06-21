@@ -10,6 +10,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +32,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.OkHttpClient;
 
@@ -70,6 +73,12 @@ public class CreateEvent extends AppCompatActivity {
 
 
     public void createEvent(View view) {
+
+        if (!validate()) {
+            Toast.makeText(getBaseContext(), "Please write the input in the correct form!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground (String...urls){
@@ -88,11 +97,15 @@ public class CreateEvent extends AppCompatActivity {
             // onPostExecute displays the results of the AsyncTask.
             @Override
             protected void onPostExecute (String result){
-                _tvResult.setText(result);
+//                _tvResult.setText(result);
+                Intent intentAfterCreateEvent = new Intent(getApplicationContext(), MainActivity.class);
+                intentAfterCreateEvent.putExtra("usersToken", usersToken);
+                startActivity(intentAfterCreateEvent);
+
+                notification();
             }
         }.execute();
 
-        notification();
     }
 
 
@@ -101,7 +114,7 @@ public class CreateEvent extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Your event has been created")
-                .setContentText("Your event has been created in the app. You can see it anytime in the Your Events page.")
+                .setContentText("An event with the title: " + _title + "has been created in the app. You can see it anytime in the Your Events page.")
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("Your event has been created in the app. You can see it anytime in the Your Events page."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
@@ -185,6 +198,40 @@ public class CreateEvent extends AppCompatActivity {
 
         return randNum;
     }
+
+
+    // Validate the data written from the user
+    public boolean validate() {
+        boolean valid = true;
+
+        String titleInput = _title.getText().toString();
+        String authorInput = _author.getText().toString();
+        String contentInput = _content.getText().toString();
+
+        if (titleInput.isEmpty() || titleInput.length() < 3) {
+            _title.setError("at least 3 characters");
+            valid = false;
+        } else {
+            _title.setError(null);
+        }
+
+        if (authorInput.isEmpty() || authorInput.length() < 3) {
+            _author.setError("at least 3 characters");
+            valid = false;
+        } else {
+            _author.setError(null);
+        }
+
+        if (contentInput.isEmpty() || contentInput.length() < 10) {
+            _content.setError("at least 10 characters");
+            valid = false;
+        } else {
+            _content.setError(null);
+        }
+
+        return valid;
+    }
+
 
 
     /*MENU*/

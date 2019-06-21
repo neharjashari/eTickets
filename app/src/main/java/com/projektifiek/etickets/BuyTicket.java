@@ -87,6 +87,9 @@ public class BuyTicket extends AppCompatActivity {
                             intent.putExtra("content", boughtTicketContent);
                             intent.putExtra("price", boughtTicketPrice);
                             startActivity(intent);
+
+                            // Send notification
+                            notification();
                         }
                     });
                     alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -97,8 +100,6 @@ public class BuyTicket extends AppCompatActivity {
                     });
                     AlertDialog alertDialog = alertBuilder.create();
                     alertDialog.show();
-
-                    notification();
 
                 } else {
                     Toast.makeText(BuyTicket.this, "Please complete the form", Toast.LENGTH_LONG).show();

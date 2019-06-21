@@ -123,6 +123,7 @@ public class QRCode extends AppCompatActivity {
 
     public void generateQrCode() {
         inputValue = edtValue.getText().toString().trim();
+//        inputValue = "hsdfhlsdlhfskldfhksdklfhsdfsdlfkhs";
         Toast.makeText(this, "QR code generated for: \"" + inputValue + "\"", Toast.LENGTH_LONG).show();
 
         if (inputValue.length() > 0) {
