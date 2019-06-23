@@ -59,11 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), EventActivity.class);
                 intent.putExtra("usersToken", usersToken);
                 intent.putExtra("id", adapteri.data.get(position).getId());
-//                intent.putExtra("title", adapteri.data.get(position).getTitle());
-//                intent.putExtra("author", adapteri.data.get(position).getAuthor());
-//                intent.putExtra("date_created", adapteri.data.get(position).getDateCreated());
-//                intent.putExtra("content", adapteri.data.get(position).getContent());
-//                intent.putExtra("price", adapteri.data.get(position).getPrice());
                 startActivity(intent);
             }
         });
@@ -111,9 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(MainActivity.this, "Error: Fetching the JSON data.", Toast.LENGTH_SHORT).show();
-                    }
-                    finally {
+                    } finally {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

@@ -48,8 +48,18 @@ public class UserTickets extends AppCompatActivity {
 
         lvUserEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                Toast.makeText(MainActivity.this, adapteri.data.get(position).getTitle(), Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(getApplicationContext(), TicketEvent.class);
+                intent.putExtra("usersToken", usersToken);
+                intent.putExtra("id", adapteri.data.get(position).getId());
+                intent.putExtra("title", adapteri.data.get(position).getTitle());
+                intent.putExtra("author", adapteri.data.get(position).getAuthor());
+                intent.putExtra("date_created", adapteri.data.get(position).getDateCreated());
+                intent.putExtra("content", adapteri.data.get(position).getContent());
+                intent.putExtra("price", adapteri.data.get(position).getPrice());
+                startActivity(intent);
             }
         });
 
@@ -96,9 +106,7 @@ public class UserTickets extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(UserTickets.this, "Error: Fetching the JSON data.", Toast.LENGTH_SHORT).show();
-                    }
-                    finally {
+                    } finally {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

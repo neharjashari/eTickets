@@ -17,20 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Notifications">
-
-        </activity>
+        <activity android:name=".TicketEvent"
+            android:parentActivityName=".UserTickets" ></activity>
+        <activity android:name=".Notifications"></activity>
         <activity
             android:name=".UserTickets"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".BuyTicket"
             android:parentActivityName=".EventActivity" />
         <activity
             android:name=".QRCode"
-            android:parentActivityName=".BuyTicket" >
-
-        </activity>
+            android:parentActivityName=".BuyTicket"></activity>
         <activity
             android:name=".UserEvents"
             android:parentActivityName=".MainActivity" />
@@ -42,10 +40,10 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".EventActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppThemeNoActionBar"></activity>
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".OpeningScreen"
             android:theme="@style/AppThemeNoActionBar">
@@ -58,10 +56,8 @@
         <activity
             android:name=".SignUp"
             android:parentActivityName=".LoginActivity"
-            android:theme="@style/AppThemeNoActionBar">
-
-        </activity>
-        <activity android:name=".MainActivity"></activity>
+            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

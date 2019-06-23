@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ public class EventActivity extends AppCompatActivity {
     TextView authorTextView;
     TextView priceTextView;
     TextView contentTextView;
+    Button btnBuyTicket;
+    ImageView photoImageView;
 
     String ticketId = "";
     String title = "";
@@ -40,6 +44,7 @@ public class EventActivity extends AppCompatActivity {
     String price = "";
 
     public String usersToken = "";
+    public boolean isCreatedByUser = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +56,22 @@ public class EventActivity extends AppCompatActivity {
         authorTextView = (TextView) findViewById(R.id.authorTextView);
         priceTextView = (TextView) findViewById(R.id.priceTextView);
         contentTextView = (TextView) findViewById(R.id.contentTextView);
+        btnBuyTicket = (Button) findViewById(R.id.btnBuyTicket);
+        photoImageView = (ImageView) findViewById(R.id.photoImageView);
 
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
         ticketId = intentGetToken.getStringExtra("id");
+        isCreatedByUser = intentGetToken.getBooleanExtra("isCreatedByUser",false);
 //        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Ticket ID: " + ticketId, Toast.LENGTH_SHORT).show();
 
+
+        // If the event is created by the current user then set the BuyTicket button to Invisible
+        if (isCreatedByUser == true) {
+            btnBuyTicket.setVisibility(View.INVISIBLE);
+            photoImageView.setImageResource(R.drawable.eventicon9);
+        }
 
         Request request = new
                 Request.Builder()
@@ -117,7 +131,6 @@ public class EventActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(EventActivity.this, "Error: Fetching the JSON data.", Toast.LENGTH_SHORT).show();
                         }
 
                 }

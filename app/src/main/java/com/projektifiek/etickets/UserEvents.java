@@ -31,6 +31,7 @@ public class UserEvents extends AppCompatActivity {
     EventAdapter adapteri;
 
     public String usersToken = "";
+    public boolean isCreatedByUser = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,14 @@ public class UserEvents extends AppCompatActivity {
 
         lvUserEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //                Toast.makeText(MainActivity.this, adapteri.data.get(position).getTitle(), Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(getApplicationContext(), EventActivity.class);
+                intent.putExtra("usersToken", usersToken);
+                intent.putExtra("id", adapteri.data.get(position).getId());
+                intent.putExtra("isCreatedByUser", isCreatedByUser);
+                startActivity(intent);
             }
         });
 
@@ -95,9 +102,7 @@ public class UserEvents extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(UserEvents.this, "Error: Fetching the JSON data.", Toast.LENGTH_SHORT).show();
-                    }
-                    finally {
+                    } finally {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

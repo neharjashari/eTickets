@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="50dp"
+    tools:context=".TicketEvent">
+
+    <TextView
+        android:id="@+id/edt_value"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:text="Titulli i Eventit + ID-ja e eventit"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/QR_Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR code for your ticket\nUse this code as a ticket for the event\n\n
+        You can take a screenshot of this or access it on the Your Tickets Page"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnBuy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:text="Get to main page"
+        android:textSize="17sp"
+        android:textColor="@android:color/white"
+        android:onClick="openMainActivity"/>
+
+</LinearLayout>
