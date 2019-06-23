@@ -28,6 +28,8 @@ public class UserProfile extends AppCompatActivity {
     TextView _userEmail;
     TextView _userToken;
 
+    String user_email = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +78,7 @@ public class UserProfile extends AppCompatActivity {
 
         _userFullname.setText(fullnameDB);
         _userEmail.setText(emailDB);
+        user_email = emailDB;
     }
 
 
@@ -83,8 +86,21 @@ public class UserProfile extends AppCompatActivity {
     public void deleteUser(View view) {
 
         // TODO: delete user and logout from the app, go to LoginActivity
+        usersDB = database.getWritableDatabase();
 
+        Log.w("myApp", "Get Writable Database: " + usersDB.getPath());
 
+        String TABLE_NAME = "users";
+        String KEY_NAME = "email";
+        String USER_EMAIL = user_email;
+
+        Log.w("myApp", "TABLE_NAME: " + TABLE_NAME);
+        Log.w("myApp", "USER_EMAIL: " + USER_EMAIL);
+
+        usersDB.delete(TABLE_NAME,  KEY_NAME + "=?", new String[]{USER_EMAIL});
+
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
 
         // Notify user
         notification();
@@ -120,7 +136,6 @@ public class UserProfile extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.menu_add_event:
                 Intent intentAddEvent = new Intent(getApplicationContext(), CreateEvent.class);

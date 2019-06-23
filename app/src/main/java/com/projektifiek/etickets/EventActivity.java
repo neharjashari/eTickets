@@ -164,7 +164,6 @@ public class EventActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.menu_add_event:
                 Intent intentAddEvent = new Intent(getApplicationContext(), CreateEvent.class);
