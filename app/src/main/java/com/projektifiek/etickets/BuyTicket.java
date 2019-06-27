@@ -80,7 +80,7 @@ public class BuyTicket extends AppCompatActivity {
 
                             Intent intent = new Intent(getApplicationContext(), QRCode.class);
                             intent.putExtra("usersToken", usersToken);
-                            intent.putExtra("id", "1");
+                            intent.putExtra("id", boughtTicketId);
                             intent.putExtra("title", boughtTicketTitle);
                             intent.putExtra("author", boughtTicketAuthor);
                             intent.putExtra("date_created", boughtTicketDateCreated);

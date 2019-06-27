@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,19 +64,19 @@ public class EventActivity extends AppCompatActivity {
         usersToken = intentGetToken.getStringExtra("usersToken");
         ticketId = intentGetToken.getStringExtra("id");
         isCreatedByUser = intentGetToken.getBooleanExtra("isCreatedByUser",false);
-//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Ticket ID: " + ticketId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Ticket ID: " + ticketId, Toast.LENGTH_SHORT).show();
 
 
         // If the event is created by the current user then set the BuyTicket button to Invisible
-        if (isCreatedByUser == true) {
+        if (isCreatedByUser) {
             btnBuyTicket.setVisibility(View.INVISIBLE);
             photoImageView.setImageResource(R.drawable.eventicon9);
         }
 
         Request request = new
                 Request.Builder()
-                .url("http://192.168.179.1:8000/event/" + usersToken + "/" + ticketId)
+                .url("http://192.168.179.1:8000/events/" + ticketId)
                 .get()
                 .build();
         Call call = client.newCall(request);
@@ -92,14 +93,14 @@ public class EventActivity extends AppCompatActivity {
                 {
                     Log.w("JSON: ", "Successful json response.");
 
-                    String strJsonResponse =
-                            response.body().string();
+                    String strJsonResponse = response.body().string();
 
-                    Log.w("JSON: ", strJsonResponse);
+//                    Log.w("JSON: ", strJsonResponse);
 
                     try {
-
                         JSONObject jsonObject = new JSONObject(strJsonResponse);
+
+                        Log.w("JSON: ", String.valueOf(jsonObject));
 
                         ticketId = jsonObject.getString("id");
                         title = jsonObject.getString("title");
@@ -143,7 +144,7 @@ public class EventActivity extends AppCompatActivity {
     public void openBuyTicketActivity(View view) {
         Intent intent = new Intent(getApplicationContext(), BuyTicket.class);
         intent.putExtra("usersToken", usersToken);
-        intent.putExtra("id", "1");
+        intent.putExtra("id", ticketId);
         intent.putExtra("title", title);
         intent.putExtra("author", author);
         intent.putExtra("date_created", dateCreated);
