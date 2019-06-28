@@ -64,7 +64,7 @@ public class EventActivity extends AppCompatActivity {
         usersToken = intentGetToken.getStringExtra("usersToken");
         ticketId = intentGetToken.getStringExtra("id");
         isCreatedByUser = intentGetToken.getBooleanExtra("isCreatedByUser",false);
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_SHORT).show();
 //        Toast.makeText(this, "Ticket ID: " + ticketId, Toast.LENGTH_SHORT).show();
 
 
@@ -190,11 +190,6 @@ public class EventActivity extends AppCompatActivity {
                 Intent intentOpenUserTickets = new Intent(getApplicationContext(), UserTickets.class);
                 intentOpenUserTickets.putExtra("usersToken", usersToken);
                 startActivity(intentOpenUserTickets);
-                return true;
-            case R.id.menu_settings:
-//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-////                intentSettings.putExtra("usersToken", usersToken);
-//                startActivity(intentSettings);
                 return true;
             case R.id.menu_exit_the_app:
                 finish();

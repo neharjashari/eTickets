@@ -29,4 +29,34 @@
     <string name="notifications_title">Allow notifications</string>
     <string name="channel_name">channelName</string>
     <string name="channel_description">channelDescription</string>
+
+
+    <!-- Other Strings -->
+    <string name="already_a_member_login">Already a member? Login</string>
+    <string name="titulli_i_eventit">Titulli i eventit</string>
+    <string name="autori_nehar_jashari">Autori: Nehar Jashari</string>
+    <string name="date_created_17_05_1998">Date Created: 17-05-1998</string>
+    <string name="price_event">20.00 $</string>
+    <string name="your_tickets">Your Tickets</string>
+    <string name="delete_user">Delete User</string>
+    <string name="token">Token:</string>
+    <string name="tv_user_email">TextView</string>
+    <string name="email_user">Email:</string>
+    <string name="tv_user_fullname">TextView</string>
+    <string name="events_created_by_you">Events Created By You</string>
+    <string name="qr_code_tv">QR code for your ticket Use this code as a ticket for the event   You can take a screenshot of this or access it on the Your Tickets Page</string>
+    <string name="get_to_main_page">Get to main page</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="create_account_hint">Create Account</string>
+    <string name="tv_qr_code">QR code generated Use this code as a ticket for the event   You can take a screenshot of this or access it on the Your Tickets Page</string>
+    <string name="edt_value">Titulli i Eventit + ID-ja e eventit</string>
+    <string name="upcoming_events">Upcoming Events</string>
+    <string name="no_account_yet_create_one">No account yet? Create one</string>
+    <string name="login">Login</string>
+    <string name="password_hint_login">Password</string>
+    <string name="email_hint_login">Email</string>
+    <string name="textview_dateCreated">TextView</string>
+    <string name="textview_author">TextView</string>
 </resources>

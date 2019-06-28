@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="TextView"
+        android:text="@string/tv_user_fullname"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="25sp"
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Email:"
+        android:text="@string/email_user"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
@@ -51,12 +51,12 @@
         style="@style/Hyperlink"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:text="TextView"
+        android:text="@string/tv_user_email"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewEmail"
-        app:layout_constraintEnd_toEndOf="@+id/user_token"
+        app:layout_constraintBottom_toBottomOf="@id/textViewEmail"
+        app:layout_constraintEnd_toEndOf="@id/user_token"
         tools:text="User Email" />
 
     <TextView
@@ -64,11 +64,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
-        android:text="Token: "
+        android:text="@string/token"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/user_token"
+        app:layout_constraintBottom_toBottomOf="@id/user_token"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
@@ -92,9 +92,10 @@
         android:background="@color/colorAccent"
         android:onClick="deleteUser"
         android:padding="10dp"
-        android:text="Delete User"
+        android:text="@string/delete_user"
         android:textColor="#FFFFFF"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_token" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

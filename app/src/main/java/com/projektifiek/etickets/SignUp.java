@@ -74,7 +74,6 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-
         try {
             // Generate HASH
             String generatedSecuredPasswordHash = generateStrongPasswordHash(password);

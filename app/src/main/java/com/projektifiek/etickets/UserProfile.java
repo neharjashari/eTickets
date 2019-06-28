@@ -85,7 +85,6 @@ public class UserProfile extends AppCompatActivity {
     // Deleting the user from DB
     public void deleteUser(View view) {
 
-        // TODO: delete user and logout from the app, go to LoginActivity
         usersDB = database.getWritableDatabase();
 
         Log.w("myApp", "Get Writable Database: " + usersDB.getPath());
@@ -161,11 +160,6 @@ public class UserProfile extends AppCompatActivity {
                 Intent intentOpenUserTickets = new Intent(getApplicationContext(), UserTickets.class);
                 intentOpenUserTickets.putExtra("usersToken", usersToken);
                 startActivity(intentOpenUserTickets);
-                return true;
-            case R.id.menu_settings:
-//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-////                intentSettings.putExtra("usersToken", usersToken);
-//                startActivity(intentSettings);
                 return true;
             case R.id.menu_exit_the_app:
                 finish();

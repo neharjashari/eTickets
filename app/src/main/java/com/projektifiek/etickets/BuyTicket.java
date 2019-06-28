@@ -48,7 +48,7 @@ public class BuyTicket extends AppCompatActivity {
         boughtTicketDateCreated = intentGetToken.getStringExtra("date_created");
         boughtTicketContent = intentGetToken.getStringExtra("content");
         boughtTicketPrice = intentGetToken.getStringExtra("price");
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
 
         cardForm = findViewById(R.id.card_form);
@@ -164,11 +164,6 @@ public class BuyTicket extends AppCompatActivity {
                 Intent intentOpenUserTickets = new Intent(getApplicationContext(), UserTickets.class);
                 intentOpenUserTickets.putExtra("usersToken", usersToken);
                 startActivity(intentOpenUserTickets);
-                return true;
-            case R.id.menu_settings:
-//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-////                intentSettings.putExtra("usersToken", usersToken);
-//                startActivity(intentSettings);
                 return true;
             case R.id.menu_exit_the_app:
                 finish();

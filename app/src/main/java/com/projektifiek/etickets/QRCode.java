@@ -125,7 +125,7 @@ public class QRCode extends AppCompatActivity {
 
     public void generateQrCode() {
         inputValue = edtValue.getText().toString().trim();
-        Toast.makeText(this, "QR code generated for: \"" + inputValue + "\"", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "QR code generated for: \"" + inputValue + "\"", Toast.LENGTH_LONG).show();
 
         if (inputValue.length() > 0) {
             WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -291,11 +291,6 @@ public class QRCode extends AppCompatActivity {
                 Intent intentOpenUserTickets = new Intent(getApplicationContext(), UserTickets.class);
                 intentOpenUserTickets.putExtra("usersToken", usersToken);
                 startActivity(intentOpenUserTickets);
-                return true;
-            case R.id.menu_settings:
-//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-////                intentSettings.putExtra("usersToken", usersToken);
-//                startActivity(intentSettings);
                 return true;
             case R.id.menu_exit_the_app:
                 finish();

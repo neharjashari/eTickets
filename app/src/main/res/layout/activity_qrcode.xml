@@ -13,7 +13,7 @@
         android:id="@+id/edt_value"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:text="Titulli i Eventit + ID-ja e eventit"
+        android:text="@string/edt_value"
         android:textSize="20sp"
         android:textAlignment="center"
         android:visibility="invisible"/>
@@ -29,8 +29,7 @@
         android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="QR code generated\nUse this code as a ticket for the event\n\n
-        You can take a screenshot of this or access it on the Your Tickets Page"
+        android:text="@string/tv_qr_code"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:visibility="invisible" />
@@ -45,7 +44,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
-        android:text="Get to main page"
+        android:text="@string/get_to_main_page"
         android:textSize="17sp"
         android:textColor="@android:color/white"
         android:onClick="openMainActivity"/>

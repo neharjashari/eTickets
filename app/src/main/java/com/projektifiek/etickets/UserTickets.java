@@ -158,11 +158,6 @@ public class UserTickets extends AppCompatActivity {
                 intentOpenUserTickets.putExtra("usersToken", usersToken);
                 startActivity(intentOpenUserTickets);
                 return true;
-            case R.id.menu_settings:
-//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-////                intentSettings.putExtra("usersToken", usersToken);
-//                startActivity(intentSettings);
-                return true;
             case R.id.menu_exit_the_app:
                 finish();
                 return true;

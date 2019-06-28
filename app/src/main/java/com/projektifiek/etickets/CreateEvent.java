@@ -65,7 +65,7 @@ public class CreateEvent extends AppCompatActivity {
 
         Intent intentGetToken = getIntent();
         usersToken = intentGetToken.getStringExtra("usersToken");
-        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Users Token: " + usersToken, Toast.LENGTH_LONG).show();
 
         URL = "http://192.168.179.1:8000/event/" + usersToken;
 
@@ -270,11 +270,6 @@ public class CreateEvent extends AppCompatActivity {
                 Intent intentOpenUserTickets = new Intent(getApplicationContext(), UserTickets.class);
                 intentOpenUserTickets.putExtra("usersToken", usersToken);
                 startActivity(intentOpenUserTickets);
-                return true;
-            case R.id.menu_settings:
-//                Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-////                intentSettings.putExtra("usersToken", usersToken);
-//                startActivity(intentSettings);
                 return true;
             case R.id.menu_exit_the_app:
                 finish();
